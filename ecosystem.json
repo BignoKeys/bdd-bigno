@@ -1,14 +1,14 @@
 {
   "apps" : [
     {    
-    "name"        : "bdd",
+    "name"        : "bdd-bigno",
     "script"      : ".",    
     // "watch"       : true,    
     "watch"       : ["common","server"],    
     // "ignore_watch": ["uploads","client","node_modules"],
     "merge_logs"  : true,
     "no_daemon"   : true,
-    "cwd"         : "/var/www/bdd",    
+    "cwd"         : "/var/www/bdd-bigno",    
     "env": {
       "NODE_ENV": "development",
       "AWESOME_SERVICE_API_TOKEN": "xxx"

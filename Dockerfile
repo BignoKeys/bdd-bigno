@@ -1,7 +1,7 @@
 # Set the base image to Ubuntu
 FROM ubuntu:14.04
 
-MAINTAINER Allan Koch Veiga
+MAINTAINER Raquel Machado de Sousa
 
 # Install Node.js and other dependencies
 RUN apt-get update && \
@@ -16,12 +16,12 @@ RUN apt-get install build-essential -y && apt-get install imagemagick -y
 # Install PM2
 RUN npm install -g pm2
 
-RUN mkdir -p /var/www/bdd
+RUN mkdir -p /var/www/bdd-bigno
 
 # Define working directory
-WORKDIR /var/www/bdd
+WORKDIR /var/www/bdd-bigno
 
-# ADD . /var/www/bdd
+# ADD . /var/www/bdd-bigno
 
 # Expose port
 EXPOSE 3030

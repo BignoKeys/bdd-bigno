@@ -4,16 +4,16 @@ services:
   web:
     build: .
     volumes:
-      - .:/var/www/bdd
+      - .:/var/www/bdd-bigno
     links:
       - mongo
     ports:
       - "3030:3030" 
-    container_name: rcpol_node   
+    container_name: bigno_node   
   mongo:
     image: mongo
     ports:
       - "27017:27017"
     volumes:
       - ../db:/data/db
-    container_name: rcpol_mongo
+    container_name: bigno_mongo
