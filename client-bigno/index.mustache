@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : Yellow Dahlia 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20130504
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<!-- POLYMER e CUSTUM COMPONENTS -->
+<script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>	
+<link rel="import" href="bower_components/google-analytics/google-analytics.html">	
+
+<link rel="import" href="/elements/autocomplete-species.html"></script>	
+<link rel="import" href="/elements/autocomplete-descriptors.html"></script>	
+
+<!-- Google fonts -->
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic|Roboto+Condensed' rel='stylesheet' type='text/css'>
+<script src="javascript/md5.min.js"></script>
+
+<!-- Css Documento -->
+<link rel="stylesheet" href="/css/{{base}}_chave.css">
+<link rel="stylesheet" href="/bower_components/jquery-ui/themes/base/jquery-ui.min.css">
+
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
+
+<!-- JQuery Rolagem -->
+<link rel="stylesheet" href="/javascript/jquery.mCustomScrollbar.css">
+<script src="/javascript/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<script type="text/javascript" src="/javascript/chave.js"></script>
+<script type="text/javascript" src="/javascript/internacionalization.js"></script>
+
+<!-- Seção de JavaScript -->
+
+<style>
+		.ui-state-active,
+		.ui-widget-content .ui-state-active,
+		.ui-widget-header .ui-state-active,
+		a.ui-button:active,
+		.ui-button:active,
+		.ui-button.ui-state-active:hover {
+			border: 0px solid #dddddd;
+			/*text-shadow: 1px 1px #A8A080;*/
+			background-color: #FBE0D2;
+			/*font-weight: bold;*/
+			color: black;
+		}
+	}
+</style>
+<!-- Campos de busca, scrollbar e botões  -->
+<script type="text/javascript">
+
+	$(document).on('keyup', '.numnum', function(event) {
+		var v = this.value;
+		if($.isNumeric(v) === false) {
+        //chop off the last char entered
+        this.value = this.value.slice(0,-1);
+    }
+});
+	window.onload = function(){
+        //Barras de Rolagem das caixas
+        // $(".roxinho").mCustomScrollbar({
+        // 	scrollButtons:{ enable: true },
+        // 	theme: "dark",
+        // });
+        // $(".roxinhodesc").mCustomScrollbar({
+        // 	scrollButtons:{ enable: true },
+        // 	theme: "dark",
+        // });
+
+		        //Toggle Descritores
+		        $(".accordion").on("click", ".toggle", function(e){
+		        	var $this = $(this);
+		        	if ($this.next().hasClass('show')) {
+		        		$this.next().removeClass('show');
+		        		$this.next().slideUp(350);
+		        		$this.children('span').html('+');
+		        	} else {
+		        		$this.parent().parent().find('li .inner').removeClass('show');
+		        		$this.parent().parent().find('li .inner').slideUp(350);
+		        		$this.next().toggleClass('show');
+		        		$this.next().slideToggle(350);
+		        		$this.children('span').html('&minus;');
+		        	}
+		        });
+		//Botão Mostrar todos
+		$('.open').click(function(){
+			$('.inner').addClass('show');
+			$('li .inner').slideUp(350);
+			$('li .inner').slideToggle(350);
+			$('.accordion').find('span .toggle').html('&minus;');
+		});
+		//Botão Ocultar todos
+		$('.close').click(function(){
+			$('.inner').removeClass('show');
+			$('li .inner').slideUp(350);
+			$('.accordion').find('span .toggle').html('+');
+		});
+		//Ao clicar adiciona a classe selecionado à div vimagens
+		$(".accordion").on("click", ".vimagens", function(){
+			if ($(this).hasClass('selecionado')) {
+				$(this).removeClass('selecionado');
+			} else {
+				$(this).addClass('selecionado');
+			}
+		});
+	}	
+	var identification = new Identification();
+	identification.base = '{{base}}';
+	function updateActiveUser() {		
+		$.get("/api/Identification/activeUsers",function(rs) {
+			$('#activeUsers').html("#"+(rs.response=='0'||rs.response==0?1:rs.response)+" usuários online");			
+			setTimeout(updateActiveUser, 300000);
+		});
+	}
+	function updateAccessCount() {		
+		$.get("/api/Identification/accessCount",function(rs) {
+			$('#count').html("#"+rs.response+" acessos");
+			setTimeout(updateAccessCount, 1200000);
+		});		
+	}
+	$(document).ready(function(){
+		$("#base_selector").val('{{base}}');
+		$("#base_selector").change(function() {			
+			window.location = "/"+$("#base_selector").val();			
+		});
+		identification.internacionalization.base = '{{base}}';
+		identification.internacionalization.updateLogo();			
+		setTimeout(updateActiveUser, 1500);	
+		setTimeout(updateAccessCount, 1500);					
+		identification.startup();
+		var msg  = $( "#msg" ).dialog({
+				title:"Comunicado Importante!",
+				autoOpen: false,
+				minWidth: 500,
+		      	modal: true	      
+		    });
+		if(localStorage){
+			if(typeof localStorage.showCommunication=="undefined" || localStorage.showCommunication=='true'){
+				localStorage.showCommunication = false;
+				msg.dialog('open');
+			}			
+		} else {
+			msg.dialog('open');
+		} 			
+	});		
+</script>
+
+<!-- Cabeçalho -->
+<title>Chaves Interativas Bignoniaceae</title>
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700" rel="stylesheet" type="text/css" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<!--[if IE 6]>
+<link href="default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+
+<body>
+<div id="header-wrapper">
+	<div id="header">
+		<div id="logo">
+			<h1><a href="#">Chaves Interativas Bignoniaceae</a></h1>
+		</div>
+		<div id="menu">
+			<ul>
+				<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
+				<li><a href="glossario.mustache" accesskey="2" title="">Glossário</a></li>
+				<li><a href="sobre.mustache" accesskey="3" title="">Sobre</a></li>
+				<!-- <li><a href="#" accesskey="4" title="">Careers</a></li> -->
+				<li><a href="contato.mustache" accesskey="4" title="">Contato</a></li>
+			</ul>
+		</div>
+		<div id=menu>
+				<ul>
+					<li>
+						<span class="t-lang">
+							<img onclick="identification.translate('pt-BR')"  src="images/pt_BR.png">
+							<img onclick="identification.translate('en-US')"  src="images/en_GB.png">
+						</span>
+					</li>
+					<li>						
+						<span id="count" ></span>	
+						<span id="activeUsers"></span>					
+					</li>	
+				</ul>
+		</div>
+	</div>
+</div>
+
+<div id="banner">
+	<div class="img-border"> <a href="#"><img src="images/ipe.jpg" width="1120" height="300" alt="" /></a> </div>
+</div>
+<!--
+<div id="wrapper">
+	<div id="wide-content">
+		<div>
+			<h2>Welcome to Yellow Dahlia!</h2>
+			<p>This is <strong>Yellow Dahlia </strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.   The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>
+			<p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Donec condimentum, urna non molestie semper, ligula enim ornare nibh, quis laoreet eros quam eget ante. Aliquam libero. Vivamus nisl nibh, iaculis vitae, viverra sit amet, ullamcorper vitae, turpis. Aliquam erat volutpat. Vestibulum dui sem, pulvinar sed, imperdiet nec, iaculis nec, leo. Fusce odio. Etiam arcu dui, faucibus eget, placerat vel, sodales eget, orci. Donec ornare neque ac sem. Mauris aliquet. </p>
+			<p class="button-style"><a href="#">More Details</a></p>
+		</div>
+	</div>
+</div>
+-->
+<div id="page-wrapper">
+
+<div id="page" class="container">
+	<div id="content-side">
+		<div>
+			<ul class="style1">
+				<li class="first">
+					<h3>Descritores <input type="text" name="search" placeholder="Search.."></h3>
+					
+					<p>Ut vel nisl tristique justo ornare iaculis. Suspendisse suscipit, orci ac interdum viverra, nulla orci facilisis mi, a ultrices mi lectus vitae felis. Morbi suscipit adipiscing orci et blandit. Morbi a nulla ut tellus blandit placerat a quis eros.</p>
+					<p><a href="#" class="button-style">Read More</a></p>
+				</li>
+				<li>
+					<h3>Descritores Selecionados</h3>
+					<p>Ut vel nisl tristique justo ornare iaculis. Suspendisse suscipit, orci ac interdum viverra, nulla orci facilisis mi, a ultrices mi lectus vitae felis. Morbi suscipit adipiscing orci et blandit. Morbi a nulla ut tellus blandit placerat a quis eros.</p>
+					<p><a href="#" class="button-style">Read More</a></p>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="content">
+		<div>
+			<ul class="style1">
+				<li class="first">
+					<h3>Espécies <input type="text" name="search" placeholder="Search.."></h3>
+
+					<p>Ut vel nisl tristique justo ornare iaculis. Suspendisse suscipit, orci ac interdum viverra, nulla orci facilisis mi, a ultrices mi lectus vitae felis. Morbi suscipit adipiscing orci et blandit. Morbi a nulla ut tellus blandit placerat a quis eros.</p>
+					<p><a href="#" class="button-style">Read More</a></p>
+				</li>
+				<li>
+					<h3>Espécies Descartadas</h3>
+					<p>Ut vel nisl tristique justo ornare iaculis. Suspendisse suscipit, orci ac interdum viverra, nulla orci facilisis mi, a ultrices mi lectus vitae felis. Morbi suscipit adipiscing orci et blandit. Morbi a nulla ut tellus blandit placerat a quis eros.</p>
+					<p><a href="#" class="button-style">Read More</a></p>
+				</li>
+			</ul>
+		</div>
+	</div>
+<!--
+	<div id="sidebar">
+		<h2>Fusce ultrices</h2>
+		<ul class="style3">
+			<li class="first">
+				<p class="date">05-04-2013</p>
+				<p><a href="#">Vestibulum laoreet lorem sed amet condimentum eget ultrices et mago porttitor nequese blandit.</a></p>
+			</li>
+			<li>
+				<p class="date">04-23-2013</p>
+				<p><a href="#">Vestibulum laoreet lorem sed amet condimentum eget ultrices et mago porttitor nequese blandit.</a></p>
+			</li>
+			<li>
+				<p class="date">04-17-2013</p>
+				<p><a href="#">Vestibulum laoreet lorem sed amet condimentum eget ultrices et mago porttitor nequese blandit.</a></p>
+			</li>
+		</ul>
+	</div>
+
+-->
+	
+</div></div>
+
+<div id="footer">
+	<p id="bigno-SiteLabel-siteCopyright">Copyright &copy; 2016 BioComp - Todos os direitos reservados e outras informa&ccedil;&otilde;es</p>
+</div>
+</body>
+</html>

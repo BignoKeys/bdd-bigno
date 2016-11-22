@@ -34,6 +34,7 @@ app.start = function() {
     else
       return null;
   }
+  
   // start the web server
   return app.listen(function() {
     app.emit('started');
