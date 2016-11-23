@@ -517,3 +517,63 @@ input[type=text] {
     float: right;
 
 }
+
+/* Busca */
+.formbusca {
+	float:left;
+	width: 400px;
+	padding-right: 25px;
+	text-align: right;
+}
+
+.fbcampo {
+	margin: 0;
+	padding: 5px 10px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 14px;
+	color: #E2BC39;
+	border:1px solid #FFAD60;
+	border-right:0px;
+}
+
+.fbbotao {
+	margin: 0;
+	padding: 10px 20px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 13px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 1px 1px 0px #FCE3BB;
+	color: #E2BC39 !important;
+	border-radius: 5px;
+	background: #EBB462;
+	line-height: 17px;
+	float: right;
+
+	/*firefox 18 edge 16*/
+}
+
+/* Fundo translucido artigo*/
+article {
+	overflow: auto;
+	background-color: white;
+	padding: 40px 50px;
+}
+
+/* Título Glossário */
+article h1.glo-tit {
+	line-height: 35px;
+	font-size: 28px;
+	margin: 0 0 25px 0;
+	font-family: 'Roboto Condensed', sans-serif;
+	float: left;
+}
+
+div.glossario-s {
+	width: 800px;
+	padding: 50px 50px 0 50px;
+	overflow: auto;
+	margin: 0;
+}
