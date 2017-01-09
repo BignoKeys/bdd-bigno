@@ -270,6 +270,7 @@ module.exports = function(Specimen) {
       callback();
     }
   }
+  
   Specimen.downloadImages = function (cb) {
     //Schema aqui vai realizar uma consulta no banco de dados pegando os valores chave e valor do registro.
     //Pelo record.image (que vai conter a url de download da image) e record.id (identificador do documento)

@@ -366,7 +366,7 @@ module.exports = function(Schema) {
       http: {path: '/xlsx/inputFromURL', verb: 'get'},
       accepts: [
         {arg: 'url', type: 'string', required:true, description: 'link para tabela do glossário'},
-        {arg: 'language', type: 'string', required:true, description: 'en-US, pt-BR or es-ES'},
+        {arg: 'language', type: 'string', required:true, description: 'en-US ou pt-BR'},
         {arg: 'sheetNumber', type: 'number', required:false, description: 'Sheet number. Default: 0'},
         //  {arg: 'redownload', type: 'boolean', required:false, description: 'true para baixar todas as imagens. false para baixar somente imagens novas. default: false', default: false}
       ],

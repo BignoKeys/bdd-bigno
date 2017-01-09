@@ -34,7 +34,6 @@ app.start = function() {
     else
       return null;
   }
-  
   // start the web server
   return app.listen(function() {
     app.emit('started');
@@ -47,7 +46,7 @@ app.start = function() {
   });
 };
 // app.use(loopback.compress());
-app.use(loopback.static(path.resolve(__dirname, '../client')));
+app.use(loopback.static(path.resolve(__dirname, '../client-bigno')));
 
 // Aqui (para a chave) vai ter que ser diferente porque a quantidade de parâmetros é variável. Vai ter que usar os parametros do tipo ?parmA=X&paramB=Y
 app.get('/', function(req, res) {  
@@ -57,16 +56,16 @@ app.get('', function(req, res) {
   res.redirect("/eco");
 });
 app.get('/eco', function(req, res) {
-  var template = fs.readFileSync('./client/index.mustache', 'utf8');
+  var template = fs.readFileSync('./client-bigno/index.mustache', 'utf8');
   // var partials = {
   //   item: fs.readFileSync('./client/item_partial.mustache', 'utf8')
   // };
   // var params = {query: req.query};
-  var params = {base: "eco"};
+  var params = {base: "eco"}; //mudar para bigno
   res.send(mustache.render(template, params));
 });
 app.get('/taxon', function(req, res) {
-  var template = fs.readFileSync('./client/index.mustache', 'utf8');
+  var template = fs.readFileSync('./client-bigno/index.mustache', 'utf8');
   // var partials = {
   //   item: fs.readFileSync('./client/item_partial.mustache', 'utf8')
   // };
@@ -77,7 +76,7 @@ app.get('/taxon', function(req, res) {
 
 // Repetir para os outros profiles
 app.get('/profile/species/:base/:id', function(req, res) {
-  var template = fs.readFileSync('./client/species.mustache', 'utf8');
+  var template = fs.readFileSync('./client-bigno/species.mustache', 'utf8');
   var params = {id: req.params.id,base: req.params.base?req.params.base:"eco"};
 
   res.send(mustache.render(template, params));
@@ -234,7 +233,7 @@ app.get('/profile/specimen/:base/:id', function(req, res) {
 });
 
 app.get('/quality/check', function(req, res) {
-  var template = fs.readFileSync('./client/quality.mustache', 'utf8');
+  var template = fs.readFileSync('./client-bigno/quality.mustache', 'utf8');
   var params = {base: "eco"};
 
   res.send(mustache.render(template, params));
@@ -259,7 +258,7 @@ app.get('/profile/palinoteca/:base/:id', function(req, res) {
       profilesDwc(params,callback);
     },
   ],function done() {
-    var template = fs.readFileSync('./client/palinoteca.mustache', 'utf8');
+    var template = fs.readFileSync('./client-bigno/palinoteca.mustache', 'utf8');
     res.send(mustache.render(template, params));
   });
 });
@@ -337,7 +336,7 @@ function profilesLabel(params,callback) {
   });
 }
 app.get('/profile/glossary/individual/:base/:id', function(req, res) {
-  var template = fs.readFileSync('./client/glossary.mustache', 'utf8');
+  var template = fs.readFileSync('./client-bigno/glossary.mustache', 'utf8');
   var Schema = app.models.Schema;
   Schema.findById(req.params.id,function(err,schema) {
     if(typeof schema.images != "undefined" && schema.images.length>0){
@@ -369,13 +368,13 @@ app.get('/profile/glossary/individual/:base/:id', function(req, res) {
 });
 
 app.get('/profile/glossary/:base/:lang*?', function(req, res){
-  var template = fs.readFileSync('./client/general_glossary.mustache', 'utf8');
+  var template = fs.readFileSync('./client-bigno/general_glossary.mustache', 'utf8');
   var params = {lang: req.params.lang, base: req.params.base?req.params.base:"eco"};
   res.send(mustache.render(template, params));
 });
 
 app.get('/profile/glossary/:base', function(req, res){
-  var template = fs.readFileSync('./client/general_glossary.mustache', 'utf8');
+  var template = fs.readFileSync('./client-bigno/general_glossary.mustache', 'utf8');
   var params = {base:req.params.base?req.params.base:"eco"};
   res.send(mustache.render(template, params));
 });

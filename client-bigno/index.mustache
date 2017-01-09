@@ -28,7 +28,7 @@ Released   : 20130504
 <script src="javascript/md5.min.js"></script>
 
 <!-- Css Documento -->
-<link rel="stylesheet" href="/css/{{base}}_chave.css">
+<link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="/bower_components/jquery-ui/themes/base/jquery-ui.min.css">
 
 <!-- JQuery -->
@@ -38,13 +38,13 @@ Released   : 20130504
 
 <!-- JQuery Rolagem -->
 <link rel="stylesheet" href="/javascript/jquery.mCustomScrollbar.css">
-<script src="/javascript/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="javascript/jquery.mCustomScrollbar.concat.min.js"></script>
 
-<script type="text/javascript" src="/javascript/chave.js"></script>
-<script type="text/javascript" src="/javascript/internacionalization.js"></script>
+<script type="text/javascript" src="javascript/chave.js"></script>
+<script type="text/javascript" src="javascript/internacionalization.js"></script>
+
 
 <!-- Seção de JavaScript -->
-
 <style>
 		.ui-state-active,
 		.ui-widget-content .ui-state-active,
@@ -60,6 +60,7 @@ Released   : 20130504
 		}
 	}
 </style>
+
 <!-- Campos de busca, scrollbar e botões  -->
 <script type="text/javascript">
 
@@ -162,119 +163,186 @@ Released   : 20130504
 <!-- Cabeçalho -->
 <title>Chaves Interativas Bignoniaceae</title>
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700" rel="stylesheet" type="text/css" />
-<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<!--<link href="css/index.css" rel="stylesheet" type="text/css" media="all" /> -->
 <!--[if IE 6]>
 <link href="default_ie6.css" rel="stylesheet" type="text/css" />
 <![endif]-->
+
 </head>
 
 <body>
-<div id="header-wrapper">
-	<div id="header">
-		<div id="logo">
-			<h1><a href="#">Chaves Interativas Bignoniaceae</a></h1>
-		</div>
-		<div id="menu">
-			<ul>
-				<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
-				<li><a href="glossario.mustache" accesskey="2" title="">Glossário</a></li>
-				<li><a href="sobre.mustache" accesskey="3" title="">Sobre</a></li>
-				<!-- <li><a href="#" accesskey="4" title="">Careers</a></li> -->
-				<li><a href="contato.mustache" accesskey="4" title="">Contato</a></li>
-			</ul>
-		</div>
-		<div id=menu>
+	<!-- Google Analytics -->
+	<google-analytics code="UA-83157202-1"></google-analytics>		
+	<div id="msg" style="" >	
+		  <h2>Verifique a versão de seu navegador de Internet.</h2>
+		  <br>
+		  <p>
+		  	Recomendamos utilizar o navegador web <a target="_blank" href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a>. Disponível para Windows, MacOS e Linux, o <a target="_blank" href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a> é o navegador que oferece melhor desempenho e suporte aos recursos do sistema RCPol. <a target="_blank" href="https://www.google.com/chrome/browser/desktop/index.html">Clique aqui para baixar e instalar gratuitamente em seu computador</a>.
+		  </p>
+		  <br>
+		  <p>
+		  	As últimas versões dos navegadores Safari e Firefox também suportam os recursos do sistema, porém com um menor desempenho e sujeito a instabilidades. Não recomendamos utilizar o Microsoft Internet Explorer.
+
+		  	Para garantir o correto funcionamento de todos os recursos do sistema, <strong>recomendamos fortemente utilizar um navegador de Internet moderno e atualizado</strong>, capaz de suportar as tecnlogias utilizadas pela chave interativa da RCPol.
+		  </p>
+		  <br>
+		  <p>
+		  	O sistema de chaves interativas da RCPol utiliza tecnologias modernas de aplicações web para proporcionar uma melhor experiência aos seus usuários.
+		  </p>
+		  <br>
+		  <p>
+		  	Para garantir o correto funcionamento de todos os recursos do sistema, <strong>recomendamos fortemente utilizar um navegador de Internet moderno e atualizado</strong>, capaz de suportar as tecnologias utilizadas pela chave interativa da RCPol.
+		  </p>
+		  <br>
+	</div>
+
+	<div id="header-wrapper">
+		<div id="header">
+			<div id="logo">
+				<h1><a href="#">Chaves Interativas Bignoniaceae</a></h1>
+			</div>
+			<div id="menu">
 				<ul>
-					<li>
-						<span class="t-lang">
-							<img onclick="identification.translate('pt-BR')"  src="images/pt_BR.png">
-							<img onclick="identification.translate('en-US')"  src="images/en_GB.png">
-						</span>
-					</li>
-					<li>						
-						<span id="count" ></span>	
-						<span id="activeUsers"></span>					
-					</li>	
+					<li class="current_page_item"><a href="#" id="bigno-SiteLabel-siteHome">Homepage</a></li>
+					<li><a href=<a href="/profile/glossary/{{base}}" id="bigno-SiteLabel-siteGlossary">Glossário</a></li>
+					<li><a href="sobre.mustache" accesskey="3" title="">Sobre</a></li>
+					<!-- <li><a href="#" accesskey="4" title="">Careers</a></li> -->
+					<li><a href="contato.mustache" accesskey="4" title="">Contato</a></li>
 				</ul>
+			</div>
+			<div id=menu>
+					<ul>
+						<li>
+							<span>
+								<img onclick="identification.translate('pt-BR')"  src="images/pt_BR.png">
+								<img onclick="identification.translate('en-US')"  src="images/en_GB.png">
+							</span>
+						</li>
+					</ul>
+			</div>
+			<div id=menu>
+				<ul>
+						<li>						
+							<span id="count" ></span>	
+							<span id="activeUsers"></span>					
+						</li>	
+					</ul>
+			</div>
 		</div>
 	</div>
-</div>
 
-<div id="banner">
-	<div class="img-border"> <a href="#"><img src="images/ipe.jpg" width="1120" height="300" alt="" /></a> </div>
-</div>
-<!--
-<div id="wrapper">
-	<div id="wide-content">
-		<div>
-			<h2>Welcome to Yellow Dahlia!</h2>
-			<p>This is <strong>Yellow Dahlia </strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.   The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>
-			<p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Donec condimentum, urna non molestie semper, ligula enim ornare nibh, quis laoreet eros quam eget ante. Aliquam libero. Vivamus nisl nibh, iaculis vitae, viverra sit amet, ullamcorper vitae, turpis. Aliquam erat volutpat. Vestibulum dui sem, pulvinar sed, imperdiet nec, iaculis nec, leo. Fusce odio. Etiam arcu dui, faucibus eget, placerat vel, sodales eget, orci. Donec ornare neque ac sem. Mauris aliquet. </p>
-			<p class="button-style"><a href="#">More Details</a></p>
-		</div>
+	<div id="banner">
+		<div class="img-border"> <a href="#"><img src="images/ipe.jpg" width="1120" height="300" alt="" /></a> </div>
 	</div>
-</div>
--->
+
+
+
+<!-- Inicio do quadro direito e esquerdo -->
 <div id="page-wrapper">
-
-<div id="page" class="container">
-	<div id="content-side">
+	<div id="page" class="container">
+	<div id="qesquerdo">
 		<div>
 			<ul class="style1">
 				<li class="first">
-					<h3>Descritores <input type="text" name="search" placeholder="Search.."></h3>
-					
-					<p>Ut vel nisl tristique justo ornare iaculis. Suspendisse suscipit, orci ac interdum viverra, nulla orci facilisis mi, a ultrices mi lectus vitae felis. Morbi suscipit adipiscing orci et blandit. Morbi a nulla ut tellus blandit placerat a quis eros.</p>
-					<p><a href="#" class="button-style">Read More</a></p>
-				</li>
-				<li>
-					<h3>Descritores Selecionados</h3>
-					<p>Ut vel nisl tristique justo ornare iaculis. Suspendisse suscipit, orci ac interdum viverra, nulla orci facilisis mi, a ultrices mi lectus vitae felis. Morbi suscipit adipiscing orci et blandit. Morbi a nulla ut tellus blandit placerat a quis eros.</p>
-					<p><a href="#" class="button-style">Read More</a></p>
-				</li>
-			</ul>
+					<!-- Título -->
+					<h2 id="bigno-KeyLabel-keyDescriptores">Descritores</h2>
+
+					<!-- Início: Busca Descritores -->
+					<form class="formbusca">
+						<input type="text" is="autocomplete-descriptors" source="identification.descriptors" placeholder="Pesquisar"></input>					
+					</form>
+
+					<div class="tfclear"></div>
+					<!-- Final: Busca Descritores -->
+
+					<!-- Início: Descritores disponíveis -->
+					<div class="roxinhobtn">
+						<!-- Botões de Expandir/Ocultar -->
+						<div class="divaeh">
+							<button type="button" class="open expocu" id="bigno-KeyLabel-keySeeAll">Ver todos</button>
+							<button type="button" class="close expocu" id="bigno-KeyLabel-keyHideAll">Ocultar todos</button>
+							<!-- <button type="button" class="btnident" onclick="identification.identify()"><span id="rcpol-KeyLabel-keyIdentify">Identificar</span> &#9654;</button> -->
+						</div>
+					</div>
+				
+
+					<div class="roxinhodesc">
+						<!-- Início: Div descritores superiores -->
+						<div class="agregadordescritores">
+
+							<ul id="category" class="accordion"></ul>
+
+		            	</div>
+		            	<!-- Final: Div Descritor superior -->
+		       		</div>
+		       	</li>
+
+		       	<li class="first">
+		       		<!-- Título -->
+			        <h2 id="bigno-KeyLabel-keySelectedDescriptores">Descritores selecionados</h2>
+
+			        <!-- Início: Descritores selecionados -->
+			        <div class="roxinho">
+
+			        	<!-- Botões de Expandir/Ocultar -->
+			        	<div class="divaeh">
+			        		<button type="button" class="expocu" onclick="identification.removeAll()" id="bigno-KeyLabel-keyRemoveAll">Remover todos</button>
+			        		<!-- <button type="button" class="expocu" onclick="removeSelected()">Remover Selecionados</button> -->
+			        	</div>
+
+			        	<div id="descritoresSelecionados" class="descel">
+			        	</div>
+
+			        </div>
+			        <!-- Final: Descritores selecionados -->
+		    	</li>
+	       	</ul>
+
 		</div>
 	</div>
 
-	<div id="content">
+
+	<div id="qdireito">
 		<div>
 			<ul class="style1">
 				<li class="first">
-					<h3>Espécies <input type="text" name="search" placeholder="Search.."></h3>
+					<!-- Título -->
+			    	<h2 id="bigno-KeyLabel-keySpecies">Espécies</h2>
 
-					<p>Ut vel nisl tristique justo ornare iaculis. Suspendisse suscipit, orci ac interdum viverra, nulla orci facilisis mi, a ultrices mi lectus vitae felis. Morbi suscipit adipiscing orci et blandit. Morbi a nulla ut tellus blandit placerat a quis eros.</p>
-					<p><a href="#" class="button-style">Read More</a></p>
-				</li>
-				<li>
-					<h3>Espécies Descartadas</h3>
-					<p>Ut vel nisl tristique justo ornare iaculis. Suspendisse suscipit, orci ac interdum viverra, nulla orci facilisis mi, a ultrices mi lectus vitae felis. Morbi suscipit adipiscing orci et blandit. Morbi a nulla ut tellus blandit placerat a quis eros.</p>
-					<p><a href="#" class="button-style">Read More</a></p>
-				</li>
-			</ul>
+			    	<!-- Início: Busca Espécies -->
+			    	<form class="formbusca" >
+			    		<input type="text" is="autocomplete-species" source="identification.species" placeholder="Pesquisar"></input>
+			    	</form>
+			    	<div class="tfclear"></div>
+			    	<!-- Final: Busca Espécies -->
+			    	<!-- Início: Espécies disponíveis -->
+			    	<div class="roxinho">
+			    		<div class="count-species">
+			    			#<span id="speciesCount">...</span></span>
+			    		</div>
+			    		<div id="especiesElegiveis"></div>
+			    	</div>
+			    	<!-- Final: Espécies disponíveis -->
+			    </li>
+			    <li class="first">
+			    	<!-- Título -->
+			    	<h2 id="bigno-KeyLabel-keyDisregardedSpecies">Espécies descartadas</h2>
+
+			    	<!-- Início: Espécies descartadas -->
+			    	<div class="roxinho">
+
+			    		<div id="especiesDescartadas">
+			    		</div>
+
+			    	</div>
+			    	<!-- Final: Espécies descartadas -->
+			    	</li>
+			    </ul>
 		</div>
 	</div>
-<!--
-	<div id="sidebar">
-		<h2>Fusce ultrices</h2>
-		<ul class="style3">
-			<li class="first">
-				<p class="date">05-04-2013</p>
-				<p><a href="#">Vestibulum laoreet lorem sed amet condimentum eget ultrices et mago porttitor nequese blandit.</a></p>
-			</li>
-			<li>
-				<p class="date">04-23-2013</p>
-				<p><a href="#">Vestibulum laoreet lorem sed amet condimentum eget ultrices et mago porttitor nequese blandit.</a></p>
-			</li>
-			<li>
-				<p class="date">04-17-2013</p>
-				<p><a href="#">Vestibulum laoreet lorem sed amet condimentum eget ultrices et mago porttitor nequese blandit.</a></p>
-			</li>
-		</ul>
-	</div>
 
--->
-	
-</div></div>
+</div>
+</div>
 
 <div id="footer">
 	<p id="bigno-SiteLabel-siteCopyright">Copyright &copy; 2016 BioComp - Todos os direitos reservados e outras informa&ccedil;&otilde;es</p>
