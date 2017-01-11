@@ -1,6 +1,14 @@
 var async = require('async');
 var hash = require('object-hash');
 var request = require('request');
+var readChunk = require('read-chunk'); 
+var imageType = require('image-type');  
+var xlsx = require('node-xlsx');
+var request = require('request');
+var fs = require('fs');
+var qt = require('quickthumb');
+var EventEmitter = require('events').EventEmitter;
+var util = require('util');
 
 module.exports = function(Species) {
 

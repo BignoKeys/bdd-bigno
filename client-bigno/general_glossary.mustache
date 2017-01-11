@@ -23,11 +23,11 @@ Released   : 20130504
 <![endif]-->
 
 	<!-- Code Base BDD -->
-	<!-- Google fonts -->
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic|Roboto+Condensed' rel='stylesheet' type='text/css'>
+	<!-- Google fonts 
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic|Roboto+Condensed' rel='stylesheet' type='text/css'> -->
 
 	<!-- Css Documento -->
-	<link rel="stylesheet" href="css/glossario.css">
+	<link href="/css/glossario.css" rel="stylesheet" type="text/css">;
 
 	<!-- jQuery -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -116,19 +116,18 @@ Released   : 20130504
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="index.mustache" accesskey="1" title="">Homepage</a></li>
-				<li class="current_page_item"><a href="#" accesskey="2" title="">Glossário</a></li>
-				<li><a href="sobre.mustache" accesskey="3" title="">Sobre</a></li>
-				<!-- <li><a href="#" accesskey="4" title="">Careers</a></li> -->
-				<li><a href="contato.mustache" accesskey="4" title="">Contato</a></li>
+				<li><a href="/{{base}}" id="bigno-SiteLabel-siteIdentificationKey">Chave de identificação de espécies</a></li>
+				<li><a href="#" id="bigno-SiteLabel-siteGlossary">Glossário</a></li>
+				<li><a href="#" id="bigno-SiteLabel-siteAbout">Sobre</a></li>
+				<li><a href="#" id="bigno-SiteLabel-siteContact">Contato</a></li>
 			</ul>
 		</div>
 		<div id=menu>
 				<ul>
 					<li>
 						<span class="t-lang">
-							<img onclick="identification.translate('pt-BR')"  src="images/pt_BR.png">
-							<img onclick="identification.translate('en-US')"  src="images/en_GB.png">
+							<img onclick="setLanguage('pt-BR')"  src="/images/pt_BR.png">
+							<img onclick="setLanguage('en-US')"  src="/images/en_GB.png">
 						</span>
 					</li>
 				</ul>
@@ -142,7 +141,7 @@ Released   : 20130504
 		<article>
 				<h2 class="glo-tit" id="bigno-SiteLabel-siteGlossary">Glossário</h2>
 				<form class="formbusca" onreset="busca(true)" onsubmit="busca(false); return false;">
-					<input type="text" id="buscaglossario" class="fbcampo" size="20" maxlength="120" value="Pesquisar"><input type="submit" value="&#9654;" class="fbbotao">
+					<input type="text" id="buscaglossario" class="fbcampo" size="18" maxlength="120" value="Pesquisar"><input type="submit" value="&#9654;" class="fbbotao">
 					<input class="fbbotao" type="reset" value="Limpar">
 				</form>
 			

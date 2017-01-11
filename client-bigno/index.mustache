@@ -23,12 +23,12 @@ Released   : 20130504
 <link rel="import" href="/elements/autocomplete-species.html"></script>	
 <link rel="import" href="/elements/autocomplete-descriptors.html"></script>	
 
-<!-- Google fonts -->
-<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic|Roboto+Condensed' rel='stylesheet' type='text/css'>
+<!-- Google fonts 
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic|Roboto+Condensed' rel='stylesheet' type='text/css'> -->
 <script src="javascript/md5.min.js"></script>
 
 <!-- Css Documento -->
-<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="/css/index.css">
 <link rel="stylesheet" href="/bower_components/jquery-ui/themes/base/jquery-ui.min.css">
 
 <!-- JQuery -->
@@ -40,8 +40,8 @@ Released   : 20130504
 <link rel="stylesheet" href="/javascript/jquery.mCustomScrollbar.css">
 <script src="javascript/jquery.mCustomScrollbar.concat.min.js"></script>
 
-<script type="text/javascript" src="javascript/chave.js"></script>
-<script type="text/javascript" src="javascript/internacionalization.js"></script>
+<script type="text/javascript" src="/javascript/chave.js"></script>
+<script type="text/javascript" src="/javascript/internacionalization.js"></script>
 
 
 <!-- Seção de JavaScript -->
@@ -203,19 +203,18 @@ Released   : 20130504
 			</div>
 			<div id="menu">
 				<ul>
-					<li class="current_page_item"><a href="#" id="bigno-SiteLabel-siteHome">Homepage</a></li>
-					<li><a href=<a href="/profile/glossary/{{base}}" id="bigno-SiteLabel-siteGlossary">Glossário</a></li>
-					<li><a href="sobre.mustache" accesskey="3" title="">Sobre</a></li>
-					<!-- <li><a href="#" accesskey="4" title="">Careers</a></li> -->
-					<li><a href="contato.mustache" accesskey="4" title="">Contato</a></li>
+					<li><a href="#" id="bigno-SiteLabel-siteIdentificationKey">Chave de identificação de espécies</a></li>
+					<li><a href="/profile/glossary/{{base}}" id="bigno-SiteLabel-siteGlossary">Glossário</a></li>
+					<li><a href="#" id="bigno-SiteLabel-siteAbout">Sobre</a></li>
+					<li><a href="#" id="bigno-SiteLabel-siteContact">Contato</a></li>
 				</ul>
 			</div>
 			<div id=menu>
 					<ul>
 						<li>
 							<span>
-								<img onclick="identification.translate('pt-BR')"  src="images/pt_BR.png">
-								<img onclick="identification.translate('en-US')"  src="images/en_GB.png">
+								<img onclick="identification.translate('pt-BR')"  src="/images/pt_BR.png">
+								<img onclick="identification.translate('en-US')"  src="/images/en_GB.png">
 							</span>
 						</li>
 					</ul>
@@ -232,7 +231,7 @@ Released   : 20130504
 	</div>
 
 	<div id="banner">
-		<div class="img-border"> <a href="#"><img src="images/ipe.jpg" width="1120" height="300" alt="" /></a> </div>
+		<div class="img-border"> <a href="#"><img src="images/header-img.jpg" width="1120" height="300" alt="" /></a> </div>
 	</div>
 
 

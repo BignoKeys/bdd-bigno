@@ -96,19 +96,19 @@ app.get('/profile/species/:base/:id', function(req, res) {
 app.get('/profile/specimen/:base/:id', function(req, res) {
   var Specimen = app.models.Specimen;
   var params = {};
-  params.id =req.params.id;
-  params.language = req.params.id.split(":")[0];
-  params.value = {};
+  params.id =req.params.id; //id da specimen
+  params.language = req.params.id.split(":")[0]; //linguagem
+  params.value = {}; //valor
   async.parallel([
     function(callback) {
-      siteLabel(params,callback);
+      siteLabel(params,callback); //parametros de siteLabel
     },
     function (callback) {
-      profilesLabel(params,callback);
+      profilesLabel(params,callback); //parametros profilesLabel
     },
     function(callback) {
       var parsedId = params.id.split(":");
-      collection([parsedId[0],parsedId[1],parsedId[2]].join(":"),params,callback);      
+      collection([parsedId[0],parsedId[1],parsedId[2]].join(":"),params,callback);      //verificar 
     },
     function specimen(callback) {
       Specimen.findById(params.id,function(err,specimen) {
@@ -237,7 +237,7 @@ app.get('/profile/specimen/:base/:id', function(req, res) {
       });
     }
   ],function done() {
-    var template = fs.readFileSync('./client/specimen.mustache', 'utf8');
+    var template = fs.readFileSync('./client-bigno/specimen.mustache', 'utf8');
     params.base = req.params.base?req.params.base:"bigno"; //mudar para bigno
     res.send(mustache.render(template, params));
   });

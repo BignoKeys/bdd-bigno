@@ -8,7 +8,7 @@ Released for free under the Creative Commons Attribution License
 body {
 	margin: 0px 0px 0px 0px;
 	padding: 0;
-	background: #E7BD2B url(images/bg01.jpg) repeat;
+	background: #E7BD2B url(/images/bg01.jpg) repeat;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 14px;
 	color: #454545;
@@ -128,14 +128,14 @@ hr {
 #menu {
 	float: right;
 	width: 700px;
-	height: 80px;
-	padding: 20px 40px 0px 0px;
+	height: 70px;
+	padding: 0px 40px 0px 0px;
 }
 
 #menu ul {
 	float: right;
 	margin: 0;
-	padding: 40px 0px 0px 0px;
+	padding: 10px 0px 0px 0px;
 	list-style: none;
 	line-height: normal;
 }
@@ -167,7 +167,7 @@ hr {
 #page-wrapper {
 	overflow: hidden;
 	padding: 90px 0 50px 0;
-	background: #F2F2F2 url(images/bg02.jpg) repeat;
+	background: #F2F2F2 url(/images/bg02.jpg) repeat;
 	border-top: 1px dashed #C7C7C7;
 }
 
@@ -280,9 +280,9 @@ hr {
 }
 
 .fbbotao {
-	padding: 10px 25px;
+	padding: 10px 20px;
 	background: #DAA520;
-	border-radius: 5px;
+	border-radius: 3px;
 	text-decoration: none;
 	color: #FFFFFF !important;
 

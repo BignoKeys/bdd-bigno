@@ -8,7 +8,7 @@ Released for free under the Creative Commons Attribution License
 body {
 	margin: 0px 0px 0px 0px;
 	padding: 0;
-	background: #E7BD2B url(images/bg01.jpg) repeat;
+	background: #E7BD2B url(/images/bg01.jpg) repeat;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 14px;
 	color: #454545;
@@ -167,7 +167,7 @@ hr {
 #page-wrapper {
 	overflow: hidden;
 	padding: 50px 0 25px 0;
-	background: #F2F2F2 url(images/bg02.jpg) repeat;
+	background: #F2F2F2 url(/images/bg02.jpg) repeat;
 	border-top: 1px dashed #C7C7C7;
 }
 
@@ -278,7 +278,7 @@ hr {
 #footer-bg {
 	overflow: hidden;
 	padding: 40px 0px;
-	background:#E5E0DD url(images/main-bsg.jpg) repeat;
+	background:#E5E0DD url(/images/main-bsg.jpg) repeat;
 }
 
 #footer-content {
@@ -627,7 +627,7 @@ div.glossario-s {
 div.qbranco {
 	overflow: hidden;
 	padding: 90px 0 50px 0;
-	background: #F2F2F2 url(images/bg02.jpg) repeat;
+	background: #F2F2F2 url(/images/bg02.jpg) repeat;
 	border-top: 1px dashed #C7C7C7;
 }
 
