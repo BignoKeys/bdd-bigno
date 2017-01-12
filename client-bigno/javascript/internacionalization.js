@@ -1,6 +1,6 @@
  function Internacionalization() {
   this.language = "pt-BR";  
-  this.base = 'eco'; //setar base 
+  this.base = 'bigno'; //setar base 
   if(localStorage){
     this.language = typeof localStorage.language!="undefined"?localStorage.language:this.language;
   } else alert("O seu navegador de Internet pode não suportar alguns dos recursos utilizados por este sistema.\n Para uma melhor experiência, por favor, atualize o seu navegador ou utilize outro de sua preferência.");  
@@ -14,12 +14,14 @@ Internacionalization.prototype.setLanguage = function(language){
   return this;
 }
 
+//mudar logo
 Internacionalization.prototype.updateLogo = function(){  
   var self = this;
   $('.logo > img').attr('src','/img/logo_'+self.base+'_'+self.language+'.png');
   return this;
 }
 
+//seleção da base
 Internacionalization.prototype.siteTranslator = function(){
   var self = this;
   $('#base_selector').html('');
