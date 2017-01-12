@@ -319,3 +319,11 @@ div.glossario-s {
 	overflow: auto;
 	margin: 0;
 }
+
+.ui-tooltip {
+  box-shadow: 0 0 7px black;
+  }
+	div.ui-tooltip {
+    max-width: 640px;
+	}
+

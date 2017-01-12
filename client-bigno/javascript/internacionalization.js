@@ -17,7 +17,7 @@ Internacionalization.prototype.setLanguage = function(language){
 //mudar logo
 Internacionalization.prototype.updateLogo = function(){  
   var self = this;
-  $('.logo > img').attr('src','/img/logo_'+self.base+'_'+self.language+'.png');
+  $('.logo > img').attr('src','/images/logo_'+self.base+'_'+self.language+'.png');
   return this;
 }
 
