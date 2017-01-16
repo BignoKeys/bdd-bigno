@@ -1,8 +1,8 @@
 var _ = require('underscore');
 var async = require('async');
 var google = require('googleapis');
-var key = require('rcpol-google-key.json');
-const VIEW_ID = 'ga:128522305';
+var key = require('Bigno-d0825896083b.json');
+const VIEW_ID = 'ga:138228139';
 
 module.exports = function(Identification) {
   Identification.accessCount = function(cb) {    
