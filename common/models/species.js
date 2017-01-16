@@ -12,7 +12,7 @@ var util = require('util');
 
 module.exports = function(Species) {
 
-  // Imagem principal das species
+  // Imagem principal das species - para comentar
   Species.mainImage = function(id,cb) {
     Species.findById(id, function (err, data) {
       if(err) throw new Error(err);
@@ -52,7 +52,9 @@ module.exports = function(Species) {
   Species.fromSpecimensAggregation = function(base,filter,cb) {
     async.parallel([
       function en(callback) {
+        //seleciona os nomes científicos
         selectScientificNames(base,"en-US",filter,function (scientificNames) {
+          //gera as especies 
           generateSpecies(base,"en-US",scientificNames,function(species) {
             callback();
           });
@@ -91,9 +93,11 @@ module.exports = function(Species) {
 
   //Gera as species
   function generateSpecies(base, language,sciName,cb) {
+    //pega as especimes
     var Specimen = Species.app.models.Specimen;
     var count = 0;
     async.each(sciName, function iterator(name, callback){
+      //seleciona as especimes com os nomes cientificos
       var query = {where:{}};
       query.where[language+":dwc:Taxon:scientificName.value"] = name; //seleciona o nome científico para cada linguagem
       query.where.base = base; //seleciona a base
@@ -186,6 +190,27 @@ module.exports = function(Species) {
   /**********************************************************************************
   ************* Modificações para chaves interativas de Bignoneacea *****************
   ***********************************************************************************/
+  //função de seleção de especies
+  // function selectScientificNameSpecies(base, language, filter, cb){
+
+  //   var species = Species.app.models.Species;
+
+  //   species.aggregate({'match':{'language': language, base: base}},{
+  //     $group:{
+  //       _id: {value: '$'+language+':dwc:Taxon:scientificName.value'}
+  //     }
+  //   }, function(err, groupByRecords){
+  //     if(err){
+  //       console.log(err,groupByRecords)
+  //     }else{
+  //       cb(groupByRecords.map(function(item){
+  //         return item._id.value;
+  //       }));
+  //     }
+  //   });
+
+  // }
+
 
   //Funções novas para species retiradas de specimen, para leitura da ficha de species
   var logs = {};
