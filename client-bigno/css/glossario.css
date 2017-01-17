@@ -304,9 +304,9 @@ article {
 }
 
 /* Título Glossário */
-article h2.glo-tit {
+article h1.glo-tit {
 	line-height: 35px;
-	font-size: 28px;
+	font-size: 32px;
 	margin: 0 0 25px 0;
 	font-family: 'Source Sans Pro', sans-serif;
 	float: left;
@@ -319,6 +319,21 @@ div.glossario-s {
 	overflow: auto;
 	margin: 0;
 }
+
+div.glossario-s h2 {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 25px;
+	font-weight: normal;
+	margin: 0 0 0 0;
+}
+
+div.glossario-s h3 {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 16px;
+	font-weight: normal;
+	margin: 0 0 13px 0;
+}
+
 
 .ui-tooltip {
   box-shadow: 0 0 7px black;
