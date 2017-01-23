@@ -13,40 +13,40 @@ var util = require('util');
 module.exports = function(Species) {
 
   // Imagem principal das species - para comentar
-  Species.mainImage = function(id,cb) {
-    Species.findById(id, function (err, data) {
-      if(err) throw new Error(err);
-      var url = "";
-      if(data["dwc:associatedMedia"]){ //Midia associada - mudar schema para bigno
-        // ensure it is an array
-        var associatedMedia = data["dwc:associatedMedia"];
-        if (!(Array.isArray(associatedMedia))) associatedMedia = [associatedMedia];
-        if(associatedMedia.length>0){
-          associatedMedia.forEach(function(media){
-            if (media.category == "Flor"){ //para categoria Flor 
-              var url = "/thumbnails/" + media.name + ".jpg";
-              cb(err, url);
-            }
-          });
-        } else {
-          cb(err, url);
-        }
-      } else {
-        cb(err, url);
-      }
-    });
-  };
+  // Species.mainImage = function(id,cb) {
+  //   Species.findById(id, function (err, data) {
+  //     if(err) throw new Error(err);
+  //     var url = "";
+  //     if(data["dwc:associatedMedia"]){ //Midia associada - mudar schema para bigno
+  //       // ensure it is an array
+  //       var associatedMedia = data["dwc:associatedMedia"];
+  //       if (!(Array.isArray(associatedMedia))) associatedMedia = [associatedMedia];
+  //       if(associatedMedia.length>0){
+  //         associatedMedia.forEach(function(media){
+  //           if (media.category == "Flor"){ //para categoria Flor 
+  //             var url = "/thumbnails/" + media.name + ".jpg";
+  //             cb(err, url);
+  //           }
+  //         });
+  //       } else {
+  //         cb(err, url);
+  //       }
+  //     } else {
+  //       cb(err, url);
+  //     }
+  //   });
+  // };
 
-  Species.remoteMethod(
-    'mainImage',
-    {
-      http: {path: '/mainImage', verb: 'get'},
-      accepts: [
-        {arg: 'id', type: 'array', required:true}
-      ],
-      returns: {arg: 'response', type: 'string'}
-    }
-  );
+  // Species.remoteMethod(
+  //   'mainImage',
+  //   {
+  //     http: {path: '/mainImage', verb: 'get'},
+  //     accepts: [
+  //       {arg: 'id', type: 'array', required:true}
+  //     ],
+  //     returns: {arg: 'response', type: 'string'}
+  //   }
+  // );
 
   //Agregação de species, pela base e pelo nome científico
   Species.fromSpecimensAggregation = function(base,filter,cb) {
@@ -103,17 +103,17 @@ module.exports = function(Species) {
       query.where.base = base; //seleciona a base
       Specimen.find(query, function (err,specimens) {
 
-        var species = {};
-        species.specimens = [];
-        species["language"] = language;        
-        species[language+":dwc:Taxon:family"] = specimens[0][language+":dwc:Taxon:family"];
-        species.base = base;
-        species[language+":dwc:Taxon:scientificName"] = specimens[0][language+":dwc:Taxon:scientificName"];
-        species[language+":dwc:Taxon:scientifimcNameAuthorship"] = specimens[0][language+":dwc:Taxon:scientificNameAuthorship"];
+        var species = {}; //especies a serem salvas no banco de dados
+        species.specimens = []; //especimes relacionadas 
+        species["language"] = language; //linguagem       
+        species[language+":dwc:Taxon:family"] = specimens[0][language+":dwc:Taxon:family"]; //Familia da especie
+        species.base = base; //base pertecente
+        species[language+":dwc:Taxon:scientificName"] = specimens[0][language+":dwc:Taxon:scientificName"]; //nome científico
+        species[language+":dwc:Taxon:scientifimcNameAuthorship"] = specimens[0][language+":dwc:Taxon:scientificNameAuthorship"]; //nome dos autores
         // TODO multiple specimens with different popular names
-        species[language+":dwc:Taxon:vernacularName"] = specimens[0][language+":dwc:Taxon:vernacularName"];
+        species[language+":dwc:Taxon:vernacularName"] = specimens[0][language+":dwc:Taxon:vernacularName"]; //nome usual
 
-        species[language+":dwc:Occurrence:establishmentMean"] = specimens[0][language+":dwc:Occurrence:establishmentMean"];
+        species[language+":dwc:Occurrence:establishmentMean"] = specimens[0][language+":dwc:Occurrence:establishmentMean"]; 
         species[language+":rcpol:Sample:floweringPeriod"] = specimens[0][language+":rcpol:Sample:floweringPeriod"]; //TODO isso é uma caracteristica da especie ou do especime?
         species[language+":rcpol:Image:plantImage"] = specimens[0][language+":rcpol:Image:plantImage"];
         species[language+":rcpol:Image:flowerImage"] = specimens[0][language+":rcpol:Image:flowerImage"];
@@ -169,6 +169,7 @@ module.exports = function(Species) {
     });
   }
   
+  //Seleciona espécimes de mesmo nome científico
   function selectScientificNames(base, language,filter,cb) {
     var Specimen = Species.app.models.Specimen;
     var sp = Specimen.getDataSource().connector.collection(Specimen.modelName);
@@ -190,27 +191,6 @@ module.exports = function(Species) {
   /**********************************************************************************
   ************* Modificações para chaves interativas de Bignoneacea *****************
   ***********************************************************************************/
-  //função de seleção de especies
-  // function selectScientificNameSpecies(base, language, filter, cb){
-
-  //   var species = Species.app.models.Species;
-
-  //   species.aggregate({'match':{'language': language, base: base}},{
-  //     $group:{
-  //       _id: {value: '$'+language+':dwc:Taxon:scientificName.value'}
-  //     }
-  //   }, function(err, groupByRecords){
-  //     if(err){
-  //       console.log(err,groupByRecords)
-  //     }else{
-  //       cb(groupByRecords.map(function(item){
-  //         return item._id.value;
-  //       }));
-  //     }
-  //   });
-
-  // }
-
 
   //Funções novas para species retiradas de specimen, para leitura da ficha de species
   var logs = {};

@@ -5,6 +5,7 @@ var key = require('Bigno-d0825896083b.json');
 const VIEW_ID = 'ga:138228139';
 
 module.exports = function(Identification) {
+  //Contagem de acessos no site 
   Identification.accessCount = function(cb) {    
     var jwtClient = new google.auth.JWT(key.client_email, null, key.private_key, ['https://www.googleapis.com/auth/analytics.readonly'], null);    
     jwtClient.authorize(function(err, tokens) {
@@ -37,7 +38,8 @@ module.exports = function(Identification) {
         }); 
       }      
     });
-  }   
+  } 
+  //Contagem de usuários ativos no momento  
   Identification.activeUsers = function(cb) {
     var jwtClient = new google.auth.JWT(key.client_email, null, key.private_key, ['https://www.googleapis.com/auth/analytics.readonly'], null);
     jwtClient.authorize(function(err, tokens) {
@@ -265,6 +267,7 @@ module.exports = function(Identification) {
   );
 };
 
+//Identificação das especies com seus estados
 function getIdentificationItems(filter, Identification, Species, Schema, mongoDs, callback){
   // filter = filter?filter:{};
   // filter.base = base;
@@ -295,12 +298,12 @@ function getIdentificationItems(filter, Identification, Species, Schema, mongoDs
             category: species[key].category,
             descriptor: species[key].field
           };
-
-          if(species[key].states){
+          //states de cada especie
+          if(species[key].states && species[key].states.length != 0 ){
             entry.states = [];
             async.eachSeries(species[key].states, function(state, callback3){
               var entry_state = {value:state.state, order:state.order, id:state.id};
-              entry.states.push(entry_state );
+              entry.states.push(entry_state);
               callback3();
             }, function(err){
               if (err) throw new Error(err);
@@ -311,6 +314,15 @@ function getIdentificationItems(filter, Identification, Species, Schema, mongoDs
             entry.numerical = species[key].numerical;
             identification_item["states"].push(entry);
             callback2();
+
+          //lidar com as especies sem estados de especimes
+          }else if(species[key].states.length == 0){
+            entry.states = [];
+            var entry_state = {value:species[key].state, order:species[key].order, id:species[key].id};
+            entry.states.push(entry_state);
+            identification_item["states"].push(entry);
+            callback2();
+
           } else {
             identification_item["states"].push(entry);
             callback2();
