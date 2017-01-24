@@ -259,30 +259,33 @@ module.exports = function(Species) {
   function saveRecord(base, originalLanguage,language,line, schema, class_, terms, callback) {
     var Schema = Species.app.models.Schema; //usando o schema
     var c = 0;
-    var record = {}; //dados as serem gravados no banco
-    record.id = Species.app.defineSpeciesID(language,line[1],line[2],line[3]); //definição do id do specimen
-    if(record.id){   //se o id existir execute
+    //var record = {}; //dados as serem gravados no banco
+    //record.id = Species.app.defineSpeciesID(language,line[1],line[2],line[3]); //definição do id do specimen
+    var species = {};
+    species.specimens = [];
+    species.id =  Species.app.defineSpeciesID(language,base,line[2]);
+    if(species.id){   //se o id existir execute
       //para termo da planilha
       async.each(terms, function(term, callbackCell){
         c++;
         //se existe o termo e a linha existe da amostra
         if(term && toString(line[c]) != ""){
           var schemaId = Species.app.defineSchemaID(language,schema[c],class_[c],terms[c]); //define o id do esquema
-          record.language = language; //recebe a linguagem
-          record.originalLanguage = originalLanguage;  //linguagem original
-          record[schemaId] = {value:toString(line[c])}; //recebe o valor da linha que esta sendo lida
-          record.base = base;
+          species.language = language; //recebe a linguagem
+          species.originalLanguage = originalLanguage;  //linguagem original
+          species[schemaId] = {value:toString(line[c])}; //recebe o valor da linha que esta sendo lida
+          species.base = base;
           if(schemaId){ //se existe id definido no esquema
             Schema.findById(schemaId,function(err,schema) { //busca o id que está no schema
               if(err) //se existe erro na busca
                 console.log(err);
               if(schema){ //se existe schema
-                var value = toString(record[schema.id].value); //pega o valor do schema
-                record[schema.id] = schema;
+                var value = toString(species[schema.id].value); //pega o valor do schema
+                species[schema.id] = schema;
                 // CATEGORICAL DESCRIPTOR
                 if(schema["class"]=="CategoricalDescriptor"){
-                  record[schema.id].value = value;
-                  record[schema.id].states = [];
+                  species[schema.id].value = value;
+                  species[schema.id].states = [];
                   async.each(value.split("|"), function(sValue, callbackState) {
                     var stateValue = titleCase(sValue.trim());
                     if(language==originalLanguage){
@@ -290,7 +293,7 @@ module.exports = function(Species) {
                       if(stateValue.length>0){
                         Schema.findOne({where:{language:originalLanguage,class:"State",field:schema.field,state:stateValue}}, function(err,state) {
                           if(state){
-                            record[schema.id].states.push(state.toJSON());
+                            species[schema.id].states.push(state.toJSON());
                           }else {
                             logs[hash.MD5("STATE NOT FOUND Field: "+schema.field+"State: "+stateValue)] = "STATE NOT FOUND\tField: "+schema.field+"\tState: "+stateValue;
                           }
@@ -309,7 +312,7 @@ module.exports = function(Species) {
                             if(state){
                               Schema.findById(Schema.app.defineSchemaID(language, state.schema, state.class, state.term),function(err,translatedState) {
                                 if(translatedState){
-                                  record[schema.id].states.push(translatedState.toJSON());
+                                  species[schema.id].states.push(translatedState.toJSON());
                                 } else{
                                   logs[hash.MD5("STATE NOT FOUND "+"Field: "+schema.field+"State: "+stateValue)] = "STATE NOT FOUND\tField: "+schema.field+"\tState: "+stateValue;
                                 }
@@ -331,13 +334,13 @@ module.exports = function(Species) {
                   });
                 // OTHER FIELDS
                 } else {
-                  record[schema.id].value = value;
+                  species[schema.id].value = value;
                   // IMAGE
                   //encontra class image no schema
                   if(schema["class"]=="Image"){ //se encontrar a classe da imagem
                     //recebe um vetor de images
-                    record[schema.id].images = [];
-                    record[schema.id].value.split("|").forEach(function(img,i){
+                    species[schema.id].images = [];
+                    species[schema.id].value.split("|").forEach(function(img,i){
                         var imageId = schema.id.split(":").slice(1).join(":")+":"+record.id.split(":").slice(1).join(":")+":"+i;
                         var image = {
                           id: imageId,
@@ -347,15 +350,15 @@ module.exports = function(Species) {
                           resized: "/resized/" + imageId + ".jpeg", //atribui a url onde vai ser salva a imagem
                           thumbnail: "/thumbnails/" + imageId + ".jpeg" //atribui a url onde vai ser salva a imagem
                         }
-                        record[schemaId].images.push(image);
+                        species[schemaId].images.push(image);
                     });
 
                   }else
                   // REFERENCE
                   if(schema["class"]=="Reference"){
-                    record[schema.id].references = [];
-                    record[schema.id].value.split("|").forEach(function (ref) {
-                      record[schema.id].references.push(ref.trim());
+                    species[schema.id].references = [];
+                    species[schema.id].value.split("|").forEach(function (ref) {
+                      species[schema.id].references.push(ref.trim());
                     });
                   }
                   callbackCell();
@@ -371,14 +374,14 @@ module.exports = function(Species) {
           callbackCell();
         }
       },function done() {
-        Species.upsert(record,function (err,instance) {
+        Species.upsert(species,function (err,instance) {
           if(err)
             console.log(err);
           callback();
         });
       });
     } else {
-      console.log("Cannot define an ID for species: ",language,line[1],line[2],line[3]);
+      console.log("Cannot define an ID for species: ",language,base,line[2]);
       callback();
     }
   }
