@@ -298,8 +298,9 @@ function getIdentificationItems(filter, Identification, Species, Schema, mongoDs
             category: species[key].category,
             descriptor: species[key].field
           };
-          //states de cada especie
-          if(species[key].states && species[key].states.length != 0 ){
+          
+          //states de cada especie 
+          if(species[key].states){
             entry.states = [];
             async.eachSeries(species[key].states, function(state, callback3){
               var entry_state = {value:state.state, order:state.order, id:state.id};
@@ -312,14 +313,6 @@ function getIdentificationItems(filter, Identification, Species, Schema, mongoDs
             });
           } else if (species[key].numerical){
             entry.numerical = species[key].numerical;
-            identification_item["states"].push(entry);
-            callback2();
-
-          //lidar com as especies sem estados de especimes
-          }else if(species[key].states.length == 0){
-            entry.states = [];
-            var entry_state = {value:species[key].state, order:species[key].order, id:species[key].id};
-            entry.states.push(entry_state);
             identification_item["states"].push(entry);
             callback2();
 
