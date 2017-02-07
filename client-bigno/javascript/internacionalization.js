@@ -1,11 +1,10 @@
  function Internacionalization() {
   this.language = "pt-BR";  
-  this.base = 'bigno'; //setar base 
+  this.base = 'bigno';
   if(localStorage){
     this.language = typeof localStorage.language!="undefined"?localStorage.language:this.language;
   } else alert("O seu navegador de Internet pode não suportar alguns dos recursos utilizados por este sistema.\n Para uma melhor experiência, por favor, atualize o seu navegador ou utilize outro de sua preferência.");  
 }
-
 Internacionalization.prototype.setLanguage = function(language){
   var self = this;
   self.language = language;
@@ -13,15 +12,11 @@ Internacionalization.prototype.setLanguage = function(language){
   self.updateLogo();  
   return this;
 }
-
-//mudar logo
 Internacionalization.prototype.updateLogo = function(){  
   var self = this;
-  $('.logo > img').attr('src','/images/logo_'+self.base+'_'+self.language+'.png');
+  $('.logo > img').attr('src','/img/logo_'+self.base+'_'+self.language+'.png');
   return this;
 }
-
-//seleção da base
 Internacionalization.prototype.siteTranslator = function(){
   var self = this;
   $('#base_selector').html('');
@@ -55,7 +50,6 @@ Internacionalization.prototype.siteTranslator = function(){
   });
   return this;
 }
-
 Internacionalization.prototype.profileTranslator = function(){
   var self = this;
   $.getJSON("/api/Schemas?filter=%7B%22where%22%3A%7B%22class%22%3A%22ProfilesLabel%22%2C%22language%22%3A%22"+self.language+"%22%7D%7D", function(data){
@@ -65,7 +59,6 @@ Internacionalization.prototype.profileTranslator = function(){
   });
   return this;
 }
-
 Internacionalization.prototype.interactionTranslator = function(){
   var self = this;
   $.getJSON("/api/Schemas?filter=%7B%22where%22%3A%7B%22class%22%3A%22InteractionLabel%22%2C%22language%22%3A%22"+self.language+"%22%7D%7D", function(data){
@@ -75,7 +68,6 @@ Internacionalization.prototype.interactionTranslator = function(){
   });
   return this;
 }
-
 Internacionalization.prototype.keyTranslator = function(){
   var self = this;
   $.getJSON("/api/Schemas?filter=%7B%22where%22%3A%7B%22class%22%3A%22KeyLabel%22%2C%22language%22%3A%22"+self.language+"%22%7D%7D", function(data){
