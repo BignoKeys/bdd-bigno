@@ -1046,4 +1046,13 @@ ul li a.toggle span {
 }
 
 
+div.especies {
+	margin: 0 0 12px 0;
+	padding: 12px;
+	width: 351px;
+	background-color:#FAFAD2;
+	overflow: auto;
+	display: flex;
+	align-itens: center;
+}
 

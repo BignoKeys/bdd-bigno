@@ -147,7 +147,7 @@ div.autocespcwrap.ui-menu-item div.especies.ui-menu-item-wrapper {
 	margin: 0;
 	padding: 12px;
 	width: 351px;
-	background-color: #F9C6A7;
+	background-color: #E2BC39;
 	overflow: auto;
 	display: flex;
 	align-itens: center;
@@ -202,10 +202,11 @@ div.especies {
 	margin: 0 0 12px 0;
 	padding: 12px;
 	width: 351px;
-	background-color: #F9C6A7;
+	background-color: #FAEBD7;
 	overflow: auto;
 	display: flex;
 	align-itens: center;
+	color:#FAEBD7;
 }
 
 div.especies img {
@@ -222,6 +223,7 @@ div.especies img {
 div.nsp {
 	order: <integer>;
 	margin: auto 0;
+
 }
 
 p.nomesp {
