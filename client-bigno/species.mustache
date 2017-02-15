@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="UTF-8">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic|Roboto+Condensed' rel='stylesheet' type='text/css'>
+   <meta name="keywords" content="" />
+   <meta name="description" content="" />
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>Chaves Interativas Bignoniaceae</title>
+   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700" rel="stylesheet" type="text/css" />
 
 	<!-- Css Documento -->
-	<link rel="stylesheet" href="/css/{{base}}_fichas.css">
+	<link rel="stylesheet" href="/css/ficha.css">
 
 	<!-- Arquivos Leaflet Map -->
 	<link rel="stylesheet" href="/javascript/leaflet/leaflet.css" />
@@ -19,7 +22,7 @@
 	<script type="text/javascript" src="/javascript/internacionalization.js"></script>
 
 	<!-- Arquivos Galeria - Fotorama -->
-	<link  href="/javascript/fotorama/{{base}}_fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+	<link  href="/javascript/fotorama/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
 	<script src="/javascript/fotorama/fotorama.js"></script> <!-- 16 KB -->
 
     <!-- Javascript Documento -->
@@ -130,174 +133,213 @@
 
 </head>
 <body>
-<div class="contem">
 	<!-- Início Header: Menu e Logotipo -->
-	<header>
-
-		<!-- Menu: início -->
-		<nav>
-			<ul>
-				<li> <!-- inserir link para o portal --> <a href="http://rcpol.org.br" id="bigno-SiteLabel-siteHome">Home</a></li>
-				<li> <!-- inserir link para a ferramenta --> <a href="/{{base}}" id="bigno-SiteLabel-siteIdentificationKey">Identifica&ccedil;&atilde;o de esp&eacute;cies</a></li>
-        <li> <!-- inserir link para o glossário --> <a href="/profile/glossary/{{base}}" id="bigno-SiteLabel-siteGlossary">Gloss&aacute;rio</a></li>
-				<li>
-					<span class="t-lang">
-							<img onclick="setLanguage('pt-BR')"  src="/img/pt_BR.png">
-							<img onclick="setLanguage('en-US')"  src="/img/en_GB.png">
-						</span>
-				</li>
-			</ul>
-		</nav>
-		<!-- Menu: fim -->
-
-		<!-- logotipo -->
-		<div class="logo">
-			<img src="/img/logo.png" alt="RCPol - Rede de Cat&aacute;logos Pol&iacute;nicos online" width="430px" height="194px">
+	<div id="header-wrapper">
+		<div id="header">
+			<div id="logo">
+				<h1><a href="/{{base}}" id="bigno-SiteLabel-siteHome">Chaves Interativas Bignoniaceae</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li><a href="/{{base}}" id="bigno-SiteLabel-siteIdentificationKey">Chave de identificação de espécies</a></li>
+					<li><a href="/profile/glossary/{{base}}" id="bigno-SiteLabel-siteGlossary">Glossário</a></li>
+					<li><a href="#" id="bigno-SiteLabel-siteAbout">Sobre</a></li>
+					<li><a href="#" id="bigno-SiteLabel-siteContact">Contato</a></li>
+				</ul>
+			</div>
+			<div id=menu>
+					<ul>
+						<li>
+							<span class="t-lang">
+								<img onclick="setLanguage('pt-BR')"  src="/images/pt_BR.png">
+								<img onclick="setLanguage('en-US')"  src="/images/en_GB.png">
+							</span>
+						</li>
+					</ul>
+			</div>
 		</div>
-		<!-- logotipo -->
+	</div>
 
-	</header>
 	<!-- Fim Header: Menu e Logotipo -->
+<div id="wrapper">
+	<div id="wide-content">
 
 	<!-- Início das informações da espécie -->
 	<article>
 
 	  <!-- Nome da espécie -->
-      <h2 class="famesp" id="dwc-Taxon-family-value"></h2>
+      <h2 class="famesp" id="dwc-Taxon-genus-value"></h2>
 	  <h1> <i> <span id="dwc-Taxon-scientificName-value"></span> </i><span id="dwc-Taxon-scientificNameAuthorship-value"></span></h1>
 
       <!--Nome popular-->
-	  <h2 class="popname" id="dwc-Taxon-vernacularName-value"></h2>
+	  <h2 class="popname" id="dwc-Taxon-taxonRank-value"></h2>
+	  <h2 class="popname" id="bigno-Sample-phenology-value"></h2>
 
 		<!-- Início: Textos -->
 	  <div class="infos-txt">
 
-	  <!-- Início: Características da Planta -->
+	  <!-- Início: Características Vegetativas -->
 	  <div class="info-planta">
-      <h2> <span id="rcpol-ProfilesLabel-profilesPlantFeatures">Caracter&iacute;sticas da Planta</span>:</h2>
-		    	<p><b><span id="rcpol-CategoricalDescriptor-habit-label"></span></b> <span id="rcpol-CategoricalDescriptor-habit-value"></span> </p>
-					<p><b><span id="dwc-Occurrence-establishmentMean-label"></span></b> <span id="dwc-Occurrence-establishmentMean-value"></span></p>
-					<p><b><span id="rcpol-Sample-floweringPeriod-label"></span></b> <span id="rcpol-Sample-floweringPeriod-value"></span></p>
-					<p><b><span id="rcpol-CategoricalDescriptor-pollinationSyndrome-label"/></b> <span id="rcpol-CategoricalDescriptor-pollinationSyndrome-value"/></p>
+      <h2> <span id="bigno-ProfilesLabel-profilesVegetativeFeatures">Caracter&iacute;sticas Vegetativas</span>:</h2>
+		    	<p><b><span id="bigno-CategoricalDescriptor-habit-label"></span></b> <span id="bigno-CategoricalDescriptor-habit-value"></span> </p>
+					<p><b><span id="bigno-CategoricalDescriptor-dimorphicGrowthForm-label"></span></b> <span id="bigno-CategoricalDescriptor-dimorphicGrowthForm-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-phloemWedgesInStem-label"></span></b> <span id="bigno-CategoricalDescriptor-phloemWedgesInStem-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-branchletSection-label"/></b> <span id="bigno-CategoricalDescriptor-branchletSection-value"/></p>
+					<p><b><span id="bigno-CategoricalDescriptor-branchletDiameter-label"></span></b> <span id="bigno-CategoricalDescriptor-branchletDiameter-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-branchletIndument-label"></span></b> <span id="bigno-CategoricalDescriptor-branchletIndument-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-branchletHairType-label"></span></b> <span id="bigno-CategoricalDescriptor-branchletHairType-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-branchletLenticels-label"></span></b> <span id="bigno-CategoricalDescriptor-branchletLenticels-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-branchletInterpetiolarGland-label"></span></b> <span id="bigno-CategoricalDescriptor-branchletInterpetiolarGland-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-branchletInterpetiolarRidge-label"></span></b> <span id="bigno-CategoricalDescriptor-branchletInterpetiolarRidge-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-branchletOdors-label"></span></b> <span id="bigno-CategoricalDescriptor-branchletOdors-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-prophyllsOfAxillaryBuds-label"></span></b> <span id="bigno-CategoricalDescriptor-prophyllsOfAxillaryBuds-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-prophyllsOfAxillaryBudsGlands-label"></span></b> <span id="bigno-CategoricalDescriptor-prophyllsOfAxillaryBudsGlands-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-leafType-label"></span></b> <span id="bigno-CategoricalDescriptor-leafType-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-leafTendrilType-label"></span></b> <span id="bigno-CategoricalDescriptor-leafTendrilType-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-leafTendrilHook-label"></span></b> <span id="bigno-CategoricalDescriptor-leafTendrilHook-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-leafTendrilAdesiveDisk-label"></span></b> <span id="bigno-CategoricalDescriptor-leafTendrilAdesiveDisk-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-leafLeafletsTexture-label"></span></b> <span id="bigno-CategoricalDescriptor-leafLeafletsTexture-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-leafLeafletsMargin-label"></span></b> <span id="bigno-CategoricalDescriptor-leafLeafletsMargin-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-leafLeafletsGlands-label"></span></b> <span id="bigno-CategoricalDescriptor-leafLeafletsGlands-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-leafLeafletsPellucidPunctations-label"></span></b> <span id="bigno-CategoricalDescriptor-leafLeafletsPellucidPunctations-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-leafLeafletsDomatia-label"></span></b> <span id="bigno-CategoricalDescriptor-leafLeafletsDomatia-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-leafLeafletsPrimaryVenation-label"></span></b> <span id="bigno-CategoricalDescriptor-leafLeafletsPrimaryVenation-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-leafLeafletsSecondaryVenation-label"></span></b> <span id="bigno-CategoricalDescriptor-leafLeafletsSecondaryVenation-value"></span></p>
+					<p><b><span id="bigno-CategoricalDescriptor-leafLeafletsTertiaryVenation-label"></span></b> <span id="bigno-CategoricalDescriptor-leafLeafletsTertiaryVenation-value"></span></p>
+
+	  
 	  </div>
+	  <!-- Fim: Características Vegetativas -->
 
 	  <!-- Início: Características da Flor -->
 	  <div class="info-flor">
-			<h2> <span id="rcpol-ProfilesLabel-profilesFlowerFeatures">Caracter&iacute;sticas da Flor</span>:</h2>
-				<p><b><span id="rcpol-CategoricalDescriptor-attractionUnit-label"/></b> <span id="rcpol-CategoricalDescriptor-attractionUnit-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-flowerSexuality-label"/></b> <span id="rcpol-CategoricalDescriptor-flowerSexuality-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-flowerForm-label"/></b> <span id="rcpol-CategoricalDescriptor-flowerForm-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-flowerSymmetry-label"/></b> <span id="rcpol-CategoricalDescriptor-flowerSymmetry-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-flowerColor-label"/></b> <span id="rcpol-CategoricalDescriptor-flowerColor-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-numberOfCarpelsInOvary-label"/></b> <span id="rcpol-CategoricalDescriptor-numberOfCarpelsInOvary-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-numberOfLoculesInTheOvary-label"/></b> <span id="rcpol-CategoricalDescriptor-numberOfLoculesInTheOvary-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-placentation-label"/></b> <span id="rcpol-CategoricalDescriptor-placentation-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-style-label"/></b> <span id="rcpol-CategoricalDescriptor-style-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-stigma-label"/></b> <span id="rcpol-CategoricalDescriptor-stigma-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-whorls-label"/></b> <span id="rcpol-CategoricalDescriptor-whorls-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-calyx-label"/></b> <span id="rcpol-CategoricalDescriptor-calyx-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-corolla-label"/></b> <span id="rcpol-CategoricalDescriptor-corolla-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-petalsxStamen-label"/></b> <span id="rcpol-CategoricalDescriptor-petalsxStamen-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-ovaryPosition-label"/></b> <span id="rcpol-CategoricalDescriptor-ovaryPosition-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-flowerOpeningTime-label"/></b> <span id="rcpol-CategoricalDescriptor-flowerOpeningTime-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-antherDehiscence-label"/></b> <span id="rcpol-CategoricalDescriptor-antherDehiscence-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-odorPresence-label"/></b> <span id="rcpol-CategoricalDescriptor-odorPresence-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-mainFloralResourceCollectedByVisitors-label"/></b> <span id="rcpol-CategoricalDescriptor-mainFloralResourceCollectedByVisitors-value"/></p>
-				<p><b><span id="rcpol-CategoricalDescriptor-flowerSize-label"/></b> <span id="rcpol-CategoricalDescriptor-flowerSize-value"/></p>
+			<h2> <span id="bigno-ProfilesLabel-profilesFlowerFeatures">Caracter&iacute;sticas da Flor</span>:</h2>
+				<p><b><span id="bigno-CategoricalDescriptor-inflorescencePosition-label"/></b> <span id="bigno-CategoricalDescriptor-inflorescencePosition-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-inflorescenceType-label"/></b> <span id="bigno-CategoricalDescriptor-inflorescenceType-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-inflorescenceBractShape-label"/></b> <span id="bigno-CategoricalDescriptor-inflorescenceBractShape-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-inflorescenceBractGlands-label"/></b> <span id="bigno-CategoricalDescriptor-inflorescenceBractGlands-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-calyxShape-label"/></b> <span id="bigno-CategoricalDescriptor-calyxShape-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-calyxApex-label"/></b> <span id="bigno-CategoricalDescriptor-calyxApex-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-calyxDouble-label"/></b> <span id="bigno-CategoricalDescriptor-calyxDouble-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-calyxTexture-label"/></b> <span id="bigno-CategoricalDescriptor-calyxTexture-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-calyxOuterIndument-label"/></b> <span id="bigno-CategoricalDescriptor-calyxOuterIndument-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-calyxGlands-label"/></b> <span id="bigno-CategoricalDescriptor-calyxGlands-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-calyxArrangementInBud-label"/></b> <span id="bigno-CategoricalDescriptor-calyxArrangementInBud-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaColor-label"/></b> <span id="bigno-CategoricalDescriptor-corollaColor-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaNectarGuides-label"/></b> <span id="bigno-CategoricalDescriptor-corollaNectarGuides-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaShape-label"/></b> <span id="bigno-CategoricalDescriptor-corollaShape-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaCurvature-label"/></b> <span id="bigno-CategoricalDescriptor-corollaCurvature-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaTexture-label"/></b> <span id="bigno-CategoricalDescriptor-corollaTexture-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaLobes-label"/></b> <span id="bigno-CategoricalDescriptor-corollaLobes-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaCircunference-label"/></b> <span id="bigno-CategoricalDescriptor-corollaCircunference-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaOuterIndument-label"/></b> <span id="bigno-CategoricalDescriptor-corollaOuterIndument-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaInnerIndumentAtTheInsertionOfStaminode-label"/></b> <span id="bigno-CategoricalDescriptor-corollaInnerIndumentAtTheInsertionOfStaminode-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaGlands-label"/></b> <span id="bigno-CategoricalDescriptor-corollaGlands-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaLobeAestivation-label"/></b> <span id="bigno-CategoricalDescriptor-corollaLobeAestivation-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaMouthAtAnthesis-label"/></b> <span id="bigno-CategoricalDescriptor-corollaMouthAtAnthesis-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-stamensAntherIndument-label"/></b> <span id="bigno-CategoricalDescriptor-stamensAntherIndument-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-stamensAntherThecae-label"/></b> <span id="bigno-CategoricalDescriptor-stamensAntherThecae-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-stamensAntherConnectiveTexture-label"/></b> <span id="bigno-CategoricalDescriptor-stamensAntherConnectiveTexture-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-stamensAntherShapeOfConnective-label"/></b> <span id="bigno-CategoricalDescriptor-stamensAntherShapeOfConnective-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-corollaIndumentAtInsertionOfStaminodeStamens-label"/></b> <span id="bigno-CategoricalDescriptor-corollaIndumentAtInsertionOfStaminodeStamens-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-stamensPollenType-label"/></b> <span id="bigno-CategoricalDescriptor-stamensPollenType-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-stamensPollenApertures-label"/></b> <span id="bigno-CategoricalDescriptor-stamensPollenApertures-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-stamensPollenExineOrnamentation-label"/></b> <span id="bigno-CategoricalDescriptor-stamensPollenExineOrnamentation-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-stamensPollenNectarDisk-label"/></b> <span id="bigno-CategoricalDescriptor-stamensPollenNectarDisk-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-stamensPollenStipeAtTheBaseOfOvary-label"/></b> <span id="bigno-CategoricalDescriptor-stamensPollenStipeAtTheBaseOfOvary-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-ovarySurface-label"/></b> <span id="bigno-CategoricalDescriptor-ovarySurface-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-ovaryIndument-label"/></b> <span id="bigno-CategoricalDescriptor-ovaryIndument-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-ovaryNumberOfOvuleSeries-label"/></b> <span id="bigno-CategoricalDescriptor-ovaryNumberOfOvuleSeries-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-ovaryStigmaShape-label"/></b> <span id="bigno-CategoricalDescriptor-ovaryStigmaShape-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-ovaryStigmaIndument-label"/></b> <span id="bigno-CategoricalDescriptor-ovaryStigmaIndument-value"/></p>
 
 		</div>
 		<!-- Final: Características da Flor -->
 
-		<!-- Início: Descrição Polínica -->
-		<div class="info-polen">
-			<h2> <span id="rcpol-ProfilesLabel-profilesPollenDescription">Descri&ccedil;&atilde;o pol&iacute;nica</span>:</h2>            
-							<p>
-								<b>
-									<span id="rcpol-CategoricalDescriptor-pollenDispersalUnit-label"/>
-								</b>
-								<span id="rcpol-CategoricalDescriptor-pollenDispersalUnit-value"></span>
-							</p>
-							<p><b><span id="rcpol-CategoricalDescriptor-pollenSymmetry-label"/></b> <span id="rcpol-CategoricalDescriptor-pollenSymmetry-value"></span>
-							</p>
-							<p><b><span id="rcpol-CategoricalDescriptor-pollenPolarity-label"/></b> <span id="rcpol-CategoricalDescriptor-pollenPolarity-value"></span>
-							</p>
-							<p><b><span id="rcpol-CategoricalDescriptor-pollenAmbit-label"/></b> <span id="rcpol-CategoricalDescriptor-pollenAmbit-value"></span>
-							</p>
-							<p><b><span id="rcpol-CategoricalDescriptor-pollenAperture-label"/></b> <span id="rcpol-CategoricalDescriptor-pollenAperture-value"></span>
-							</p>
-							<p><b><span id="rcpol-CategoricalDescriptor-colpeFeature-label"/></b> <span id="rcpol-CategoricalDescriptor-colpeFeature-value"></span>
-							</p>
-							<p><b><span id="rcpol-CategoricalDescriptor-poreFeature-label"/></b> <span id="rcpol-CategoricalDescriptor-poreFeature-value"></span>
-							</p>
-							<p><b><span id="rcpol-CategoricalDescriptor-numberOfApertures-label"/></b> <span id="rcpol-CategoricalDescriptor-numberOfApertures-value"></span>
-							</p>
-							<p><b><span id="rcpol-CategoricalDescriptor-exineOrnamentation-label"/></b> <span id="rcpol-CategoricalDescriptor-exineOrnamentation-value"></span>
-							</p>
-							<p>
-								<b>
-									<span id="rcpol-CategoricalDescriptor-pollenShape-label"/>
-								</b>
-								<span id="rcpol-CategoricalDescriptor-pollenShape-value"></span>
-							</p>
-							<p>
-								<b>
-									<span id="rcpol-CategoricalDescriptor-pollenSize-label"/>
-								</b>
-								<span id="rcpol-CategoricalDescriptor-pollenSize-value"></span>
-							</p>
 
-							<p><b><span id="rcpol-NumericalDescriptor-pollenShape-label"/></b> <span id="rcpol-NumericalDescriptor-pollenShape-value"></span>
-							</p>
-							<p><b><span id="rcpol-NumericalDescriptor-pollenShapePE-label"/></b> <span id="rcpol-NumericalDescriptor-pollenShapePE-value"></span>
-							</p>
-							<p><b><span id="rcpol-NumericalDescriptor-polarAxis-label"/></b> <span id="rcpol-NumericalDescriptor-polarAxis-value"></span>
-							</p>
-							<p><b><span id="rcpol-NumericalDescriptor-equatorialAxis-label"/></b> <span id="rcpol-NumericalDescriptor-equatorialAxis-value"></span>
-							</p>
-							<p><b><span id="rcpol-NumericalDescriptor-smallerPollenDiameter-label"/></b> <span id="rcpol-NumericalDescriptor-smallerPollenDiameter-value"></span>
-							</p>
-							<p><b><span id="rcpol-NumericalDescriptor-pollenDiameter-label"/></b> <span id="rcpol-NumericalDescriptor-pollenDiameter-value"></span>
-							</p>
-							<p><b><span id="rcpol-NumericalDescriptor-largerPollenDiameter-label"/></b> <span id="rcpol-NumericalDescriptor-largerPollenDiameter-value"></span>
-							</p>
-							<p><b><span id="rcpol-NumericalDescriptor-espexi-label"/></b> <span id="rcpol-NumericalDescriptor-espexi-value"></span>
-							</p>						
+		<!-- Início: Características da Fruto -->
+	  	<div class="info-fruto">
+			<h2> <span id="bigno-ProfilesLabel-profilesFruitFeatures">Caracter&iacute;sticas da Flor</span>:</h2>
+				<p><b><span id="bigno-CategoricalDescriptor-splitting-label"/></b> <span id="bigno-CategoricalDescriptor-splitting-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-shape-label"/></b> <span id="bigno-CategoricalDescriptor-shape-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-thickness-label"/></b> <span id="bigno-CategoricalDescriptor-thickness-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-texture-label"/></b> <span id="bigno-CategoricalDescriptor-texture-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-curvature-label"/></b> <span id="bigno-CategoricalDescriptor-curvature-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-indument-label"/></b> <span id="bigno-CategoricalDescriptor-indument-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-lenticels-label"/></b> <span id="bigno-CategoricalDescriptor-lenticels-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-glands-label"/></b> <span id="bigno-CategoricalDescriptor-glands-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-ridges-label"/></b> <span id="bigno-CategoricalDescriptor-ridges-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-margin-label"/></b> <span id="bigno-CategoricalDescriptor-margin-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-wings-label"/></b> <span id="bigno-CategoricalDescriptor-wings-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-ornamentation-label"/></b> <span id="bigno-CategoricalDescriptor-ornamentation-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-calyxInFruit-label"/></b> <span id="bigno-CategoricalDescriptor-calyxInFruit-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-seedShape-label"/></b> <span id="bigno-CategoricalDescriptor-seedShape-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-seedTexture-label"/></b> <span id="bigno-CategoricalDescriptor-seedTexture-value"/></p>
+				<p><b><span id="bigno-CategoricalDescriptor-seedIndument-label"/></b> <span id="bigno-CategoricalDescriptor-seedIndument-value"/></p>
+				
 		</div>
-		<!-- Final: Descrição Polínica -->
+		<!-- Final: Características da Fruto -->
 
-</div>
+		<!-- Início: Características Ecológicas -->
+		<div class="info-ecologia">
+			<h2> <span id="bigno-ProfilesLabel-profilesEcologicalFeatures">Caracter&iacute;sticas Ecológicas</span>:</h2>            
+							<p><b><span id="bigno-CategoricalDescriptor-floralType-label"/></b><span id="bigno-CategoricalDescriptor-floralType-value"></span>
+							</p>
+							<p><b><span id="bigno-CategoricalDescriptor-pollinationSyndrome-label"/></b> <span id="bigno-CategoricalDescriptor-pollinationSyndrome-value"></span>
+							</p>
+							<p><b><span id="bigno-CategoricalDescriptor-nectarRobberProtection-label"/></b> <span id="bigno-CategoricalDescriptor-nectarRobberProtection-value"></span>
+							</p>
+							<p><b><span id="bigno-CategoricalDescriptor-dispersalSyndrome-label"/></b> <span id="bigno-CategoricalDescriptor-dispersalSyndrome-value"></span>
+							</p>
+												
+		</div>
+		<!-- Final: Características Ecológicas -->
+
+		<!-- Início: Características de Distribuição -->
+		<div class="info-distribuicao">
+			<h2> <span id="bigno-ProfilesLabel-profilesDistributionFeatures">Caracter&iacute;sticas de Distribuição</span>:</h2>            
+							<p><b><span id="bigno-CategoricalDescriptor-habitat-label"/></b><span id="bigno-CategoricalDescriptor-habitat-value"></span>
+							</p>
+							<p><b><span id="bigno-CategoricalDescriptor-distribution-label"/></b> <span id="bigno-CategoricalDescriptor-distribution-value"></span>
+							</p>
+												
+		</div>
+		<!-- Final: Características de Distribuição -->
+
+
+		</div>
 		<!-- Final: Textos -->
 
 		<!-- Início: Imagens -->
 		<div class="infos-img">
 
-		<!-- Início: Slideshow com as imagens da planta -->
-		<div class="img-planta-ae">
+			<!-- Início: Slideshow com as imagens da planta -->
+			<div class="img-planta-ae">
 
-			<h2> <span id="rcpol-ProfilesLabel-profilesImagesOfPlantFlowerFruit">Imagens da Planta, Flor e Frutos</span>:</h2>
+				<h2> <span id="bigno-ProfilesLabel-profilesImagesOfPlantFlowerFruit">Imagens da Planta, Flor e Frutos</span>:</h2>
 
-			<div id="foto_planta" class="fotorama" data-allowfullscreen="native" data-width="425" data-maxheight="638">
-              <!-- <img src="/img/lspm.jpg">-->
+				<div id="foto_planta" class="fotorama" data-allowfullscreen="native" data-width="425" data-maxheight="638">
+	              <!-- <img src="/img/lspm.jpg">-->
+				</div>
+
 			</div>
+			<!-- Final: Slideshow com as imagens da planta -->
+
+
+			<!-- Início: Fotos do Grão de Pólen -->
+			<div class="img-polen">
+				<p class="clique-full">Clique em <img src="/images/{{base}}_full.png"> para ver as imagens em tela cheia</p>
+
+				<h2> <span id="rcpol-ProfilesLabel-profilesImagesOfPollen">Imagens do Gr&atilde;o de P&oacute;len</span>:</h2>
+
+				<div id="foto_polen" class="fotorama" data-allowfullscreen="native" data-width="425" data-maxheight="425">
+	              <!-- <img src="/img/lspm.jpg">-->
+				</div>
+
+			</div>
+			<!-- Final: Fotos do Grão de Pólen -->
 
 		</div>
-		<!-- Final: Slideshow com as imagens da planta -->
-
-
-		<!-- Início: Fotos do Grão de Pólen -->
-		<div class="img-polen">
-			<p class="clique-full">Clique em <img src="/img/{{base}}_full.png"> para ver as imagens em tela cheia</p>
-
-			<h2> <span id="rcpol-ProfilesLabel-profilesImagesOfPollen">Imagens do Gr&atilde;o de P&oacute;len</span>:</h2>
-
-			<div id="foto_polen" class="fotorama" data-allowfullscreen="native" data-width="425" data-maxheight="425">
-              <!-- <img src="/img/lspm.jpg">-->
-			</div>
-
-		</div>
-		<!-- Final: Fotos do Grão de Pólen -->
-
-</div>
 		<!-- Final: Imagens -->
 
 		<!-- Início: Mapa de distribuição -->
@@ -324,28 +366,30 @@
 		</div>
 		<!-- Final: Amostras -->
 
-        <!-- Início: Visitantes -->
-		<!-- Inserir link para a página da interação: ficha_visitantes_especie.html-->
-		<a href="/ficha_visitantes_especie.html">
-		  <div class="visitantes">		  	
-			<h2 id="rcpol-ProfilesLabel-profilesKnowFlowerVisitors">
-			  Conheça os visitantes florais dessa espécie
-			</h2>
+	        <!-- Início: Visitantes -->
+			<!-- Inserir link para a página da interação: ficha_visitantes_especie.html-->
+			<a href="/ficha_visitantes_especie.html">
+			  <div class="visitantes">		  	
+				<h2 id="rcpol-ProfilesLabel-profilesKnowFlowerVisitors">
+				  Conheça os visitantes florais dessa espécie
+				</h2>
 
-		  </div>
-		</a>
-		<!-- Final: Visitantes -->		
-		<h2 style="margin-bottom:10px" id="rcpol-SiteLabel-howToCite">Como citar:</h2>
-		<p id="rcpol-SiteLabel-citation">Rede de Catálogos Polínicos online. Available in: <<a href=" http://chave.rcpol.gov.br">http://chave.rcpol.gov.br/</a> >. Date of access: </p>
-	</article>
+			  </div>
+			</a>
+			<!-- Final: Visitantes -->		
+			<h2 style="margin-bottom:10px" id="bigno-SiteLabel-howToCite">Como citar:</h2>
+			<p id="bigno-SiteLabel-citation">Chaves Interativas Bignoniaceae. Available in:  <<a href=" href="http://chave.bigno.org.br">http://chave.bigno.org.br/</a>>. Date of access: </p>
+		</article>
 	<!-- Final das informações da espécie -->
-
-	<!-- Início do Rodapé -->
-	<footer>
-		<p id="rcpol-SiteLabel-siteCopyright">Copyright &copy; 2016 RCPol - Todos os direitos reservados e outras informa&ccedil;&otilde;es</p>		
-	</footer>
-	<!-- Final do Rodapé -->
-
+	</div>
 </div>
+
+<!-- Início do Rodapé -->
+	<div id="footer">
+		<p id="bigno-SiteLabel-siteCopyright">Copyright &copy; 2016 BioComp - Todos os direitos reservados e outras informa&ccedil;&otilde;es</p>
+	</div>
+<!-- Final do Rodapé -->
+
+
 </body>
 </html>

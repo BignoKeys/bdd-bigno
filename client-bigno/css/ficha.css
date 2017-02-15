@@ -1,0 +1,431 @@
+
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0;
+	background: #E7BD2B url(/images/bg01.jpg) repeat;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 14px;
+	color: #454545;
+}
+
+h1, h2, h3 {
+	margin: 0;
+	padding: 0;
+	font-weight: 400;
+	color: #222222;
+}
+
+h2 {
+	font-size: 3em;
+}
+
+p, ol, ul {
+	margin-top: 0px;
+	padding: 0px;
+}
+
+p, ol {
+	line-height: 180%;
+}
+
+strong {
+}
+
+a {
+	color: #5C5539;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a img {
+	border: none;
+}
+
+img.border {
+}
+
+img.alignleft {
+	float: left;
+}
+
+img.alignright {
+	float: right;
+}
+
+img.aligncenter {
+	margin: 0px auto;
+}
+
+hr {
+	display: none;
+}
+
+/** WRAPPER */
+
+#wrapper {
+	overflow: hidden;
+	background: #FFFFFF;
+	border-top: 1px dashed #B69627;
+}
+
+.container {
+	width: 1200px;
+	margin: 0px auto;
+}
+
+.clearfix {
+	clear: both;
+}
+
+/* Header */
+
+#header-wrapper {
+	overflow: hidden;
+	height: 200px;
+}
+
+#header {
+	width: 1200px;
+	height: 200px;
+	margin: 0 auto;
+	padding: 0px 0px;
+}
+
+/* Logo */
+
+#logo {
+	float: left;
+	width: 400px;
+	height: 150px;
+	padding: 0px 0px 0px 40px;
+}
+
+#logo h1 {
+	padding: 60px 0px 0px 0px;
+	text-transform: capitalize;
+	letter-spacing: -2px;
+	font-weight: 400;
+	text-shadow: 1px 1px 1px #99790C;
+	font-size: 3.6em;
+}
+
+#logo h1 a {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+
+/* Menu */
+
+#menu {
+	float: right;
+	width: 700px;
+	height: 70px;
+	padding: 0px 40px 0px 0px;
+}
+
+#menu ul {
+	float: right;
+	margin: 0;
+	padding: 10px 0px 0px 0px;
+	list-style: none;
+	line-height: normal;
+}
+
+#menu li {
+	float: left;
+}
+
+#menu a {
+	display: block;
+	margin-left: 1px;
+	padding: 20px 20px 20px 20px;
+	letter-spacing: 1px;
+	text-decoration: none;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 300;
+	color: #FFFFFF;
+}
+
+#menu a:hover, #menu .current_page_item a {
+	text-decoration: none;
+	border-top: 2px solid #1B5902;
+	color: #FFFFFF;
+}
+
+/* Page */
+
+#page-wrapper {
+	overflow: hidden;
+	padding: 90px 0 50px 0;
+	background: #F2F2F2 url(/images/bg02.jpg) repeat;
+	border-top: 1px dashed #C7C7C7;
+}
+
+#page {
+	overflow: hidden;
+	width: 1120px;
+	margin: 0px auto;
+	padding: 0 40px;
+	color: #8F8F8F;
+}
+
+/** CONTENT */
+
+#wide-content {
+	overflow: hidden;
+	width: 1120px;
+	margin: 0px auto;
+	padding: 50px 40px;
+}
+
+#wide-content h2 {
+	padding: 0px 0px 20px 0px;
+	letter-spacing: -1px;
+	font-size: 36px;
+	color: #222222;
+}
+
+
+/** CONTENT */
+
+#content {
+	float: right;
+	padding: 0px 0px 0px 0px;
+}
+
+#content-side{
+	float: left;
+	width: 500px;
+	padding: 0px 0px 0px 0px;
+}
+
+#content h2 {
+	padding: 0px 0px 20px 0px;
+	letter-spacing: -1px;
+	font-size: 36px;
+	color: #222222;
+}
+
+#content .subtitle {
+	padding: 0px 0px 30px 0px;
+	text-transform: uppercase;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 18px;
+	color: #81AFC5;
+}
+
+/* Button Style */
+
+.button-style1 {
+	margin-top: 30px;
+}
+
+.button-style1 a {
+	padding: 10px 25px;
+	background: #EBB462;
+	border-radius: 5px;
+	text-decoration: none;
+	text-shadow: 1px 1px 0px #FCE3BB;
+	color: #E2BC39 !important;
+}
+
+/* Footer */
+
+#footer {
+	padding: 50px 0px 50px 0px;
+	border-top: 1px dashed #B69627;
+}
+
+#footer p {
+	text-align: center;
+	color: #645316;
+}
+
+#footer a {
+	color: #645316;
+}
+
+/* Familia Espécie */
+h2.famesp {
+	margin: 0 0 12px 0;
+	color: #2f3d5d;
+}
+
+/* Nome popular */
+h2.popname {
+	margin: 0 0 25px 0;
+	font-size: 16px;
+}
+
+/* Div dos Textos Coluna esquerda */
+div.infos-txt {
+	display: block;
+	float: left;
+	width: 425px;
+	overflow: auto;
+}
+
+/* Características da Planta */
+div.info-planta{
+	display: block;
+	float: left;
+	width: 425px;
+}
+/* Características da Flor */
+div.info-flor{
+	display: block;
+	float: left;
+	width: 425px;
+}
+/* Características do Fruto */
+div.info-fruto{
+	display: block;
+	float: left;
+	width: 425px;
+}
+/* Características Ecologicas */
+div.info-ecologia{
+	display: block;
+	float: left;
+	width: 425px;
+}
+
+/* Características de Distribuição */
+div.info-distribuicao{
+	display: block;
+	float: left;
+	width: 425px;
+}
+
+/* Div das Imagens Coluna direita */
+div.infos-img {
+	display: block;
+	float: left;
+	width: 475px;
+	overflow: auto;
+}
+
+/* Fotos da Planta */
+div.img-planta {
+	display: none;
+	float: left;
+	width: 425px;
+	margin: 0 0 0 50px;
+}
+
+div.img-planta-ae {
+	display: none;
+	float: left;
+	width: 425px;
+	margin: 50px 0 0 50px;
+}
+
+div.img-planta-me {
+	display: none;
+	float: left;
+	width: 425px;
+	margin: 50px 0 0 50px;
+}
+
+div.img-planta h2 {
+	display: none;
+}
+
+div.img-planta-ae h2 {
+	display: none;
+}
+
+div.img-planta-me h2 {
+	display: none;
+}
+
+/* Mapa */
+div.mapa {
+	clear: both;
+	margin: 0 0 50px 0;
+}
+
+/* Tamanho Mapa Espécie */
+div.esize {
+	height: 450px;
+	width: 900px;
+}
+
+/* Tamanho Mapa Espécime */
+div.msize {
+	height: 425px;
+	width: 425px;
+}
+
+/* Tamanho Tabela Amostras */
+#grid {
+	height: 450px;
+	width: 900px;
+}
+
+
+/* Imagem Gráfico */
+img.graf_int {
+	float: right;
+	margin: 0 0 0 50px;
+}
+
+div.graf img {
+	margin: 0 4px 0 0;
+}
+
+
+
+/* Informações Palinoteca*/
+div.cspm {
+	overflow: auto;
+}
+
+div.info-spal {
+	display: block;
+	float: left;
+	width: 650px;
+}
+
+div.info-pal {
+	display: block;
+	float: left;
+	width: 650px;
+	margin: 0;
+}
+
+div.img-spal {
+	display: block;
+	float: left;
+	width: 200px;
+	margin: 0 0 0 50px;
+}
+
+/* Informações da Coleta */
+div.info-col {
+	display: block;
+	float: left;
+	width: 425px;
+}
+
+div.mspm {
+	display: block;
+	float: left;
+	width: 425px;
+	margin: 0 0 0 50px;
+}
+
+/* Referências */
+div.rre {
+	display: block;
+	margin: 0 0 -12px 0;
+	clear: both;
+}
+
+div.rre p {
+	margin: 0 0 7px 0;
+}
