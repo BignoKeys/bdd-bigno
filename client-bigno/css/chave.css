@@ -147,7 +147,7 @@ div.autocespcwrap.ui-menu-item div.especies.ui-menu-item-wrapper {
 	margin: 0;
 	padding: 12px;
 	width: 351px;
-	background-color: #E2BC39;
+	background-color: #F7E3AA;
 	overflow: auto;
 	display: flex;
 	align-itens: center;
@@ -197,58 +197,3 @@ div.autocespcwrap.ui-menu-item div.especies.ui-menu-item-wrapper div.nsp p.popn 
 }
 
 
-* Espécies */
-div.especies {
-	margin: 0 0 12px 0;
-	padding: 12px;
-	width: 351px;
-	background-color: #FAEBD7;
-	overflow: auto;
-	display: flex;
-	align-itens: center;
-	color:#FAEBD7;
-}
-
-div.especies img {
-    min-height: 100px;
-    min-width: 100px;
-	width: 100px;
-	height: 100px;
-	float: left;
-	margin: 0 12px 0 0;
-	order: <integer>;
-	text-align: center;
-}
-
-div.nsp {
-	order: <integer>;
-	margin: auto 0;
-
-}
-
-p.nomesp {
-	font-size: 18px;
-	line-height: 21px;
-	font-weight: normal;
-	width: 250px;
-}
-
-p.famisp {
-	font-weight: normal;
-	line-height: 21px;
-	font-size: 16px;
-	margin: 7px 0 0 0;
-	font-family: 'Source Sans Pro', sans-serif;
-}
-
-p.popn {
-	font-weight: normal;
-	line-height: 16px;
-	font-size: 13px;
-	margin: 7px 0 0 0;
-	font-family: 'Source Sans Pro', sans-serif;
-}
-
-img.lala {
-	padding: 0 0 0 3px;
-}
