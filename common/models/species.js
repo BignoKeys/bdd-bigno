@@ -259,10 +259,12 @@ module.exports = function(Species) {
   function saveRecord(base, originalLanguage,language,line, schema, class_, terms, callback) {
     var Schema = Species.app.models.Schema; //usando o schema
     var c = 0;
+
     //var record = {}; //dados as serem gravados no banco
     //record.id = Species.app.defineSpeciesID(language,line[1],line[2],line[3]); //definição do id do specimen
-    var species = {};
-    species.specimens = [];
+
+    var species = {}; //especies a serem gravadas no banco 
+    species.specimens = []; //espécimes a serem agregadas se houver ficha de espécimes 
     species.id =  Species.app.defineSpeciesID(language,base,line[2]);
     if(species.id){   //se o id existir execute
       //para termo da planilha
@@ -286,11 +288,13 @@ module.exports = function(Species) {
                 if(schema["class"]=="CategoricalDescriptor"){
                   species[schema.id].value = value;
                   species[schema.id].states = [];
+
                   async.each(value.split("|"), function(sValue, callbackState) {
                     var stateValue = titleCase(sValue.trim());
                     if(language==originalLanguage){
                     //  SAME LANGUAGE
                       if(stateValue.length>0){
+
                         Schema.findOne({where:{language:originalLanguage,class:"State",field:schema.field,state:stateValue}}, function(err,state) {
                           if(state){
                             species[schema.id].states.push(state.toJSON());
@@ -308,6 +312,7 @@ module.exports = function(Species) {
                       var schemaIdOriginal = Species.app.defineSchemaID(originalLanguage,schema.schema,schema["class"],schema.term);
                       Schema.findById(schemaIdOriginal,function(err,schemaOriginal) {
                         if(schemaOriginal){
+
                           Schema.findOne({where:{language:originalLanguage,class:"State",field:schemaOriginal.field,state:stateValue}}, function(err,state) {
                             if(state){
                               Schema.findById(Schema.app.defineSchemaID(language, state.schema, state.class, state.term),function(err,translatedState) {
