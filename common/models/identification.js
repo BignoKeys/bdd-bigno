@@ -67,6 +67,7 @@ module.exports = function(Identification) {
     });
   } 
   
+  //Popula os estados das espécies
   Identification.populate = function(filter, callback){
     Identification.getApp(function(err, app){
       if (err) throw new Error(err);
@@ -77,6 +78,7 @@ module.exports = function(Identification) {
     });
   };
 
+  //Identifica a base e os estados das espécies
   Identification.identify = function(param, callback) {
     //TODO: validate query
     //examples
@@ -226,7 +228,8 @@ module.exports = function(Identification) {
             count: {$sum:1}
           }}
         ], function (error, states) {
-          // console.log("****** ELIGIBLE STATES ***** \n: ",states);
+        //   console.log("****** ELIGIBLE STATES ***** \n: ",states);
+        //   console.log("****** Species ********* \n:", items);
           if (err) throw new Error(err);
           var results = {eligibleStates: states, eligibleSpecies: items};
           callback(null, results);
@@ -286,7 +289,7 @@ function getIdentificationItems(filter, Identification, Species, Schema, mongoDs
           //TODO: handle pollenShape and espexi
           // we only want entries with classes CategoricalDescriptor or NumericalDescriptor
           // we can have multiple states
-
+          
           var entry = {
             language: species[key].language,
             base: species.base,
