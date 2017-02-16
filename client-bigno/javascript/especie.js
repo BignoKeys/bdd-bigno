@@ -160,31 +160,31 @@ $.getJSON("/api/Species/"+ id, function(data){
     map.attributionControl.addAttribution('<a href="./' + id + '"">Ocorrências de ' + name  +'</a>');
     
     //Especimes
-    var specimen_ids = data.specimens.map(function(elem){return elem.id;});
-    var specimen_query = "filter[fields]["+lang+":dwc:RecordLevel:institutionCode]=true&filter[fields]["+lang+":dwc:RecordLevel:catalogNumber]=true&filter[fields]["+lang+":dwc:Location:decimalLatitude]=true&filter[fields]["+lang+":dwc:Location:decimalLongitude]=true&filter[fields]["+lang+":dwc:RecordLevel:collectionCode]=true&filter[fields]["+lang+":dwc:Occurrence:recordedBy]=true&filter[fields]["+lang+":dwc:Location:municipality]=true&filter[fields]["+lang+":dwc:Location:stateProvince]=true&filter[fields][id]=true&filter[where][id][inq]=" + specimen_ids[0];
-    specimen_ids.forEach(function(id){
-      specimen_query += "&filter[where][id][inq]=" + id;
-    });
+    // var specimen_ids = data.specimens.map(function(elem){return elem.id;});
+    // var specimen_query = "filter[fields]["+lang+":dwc:RecordLevel:institutionCode]=true&filter[fields]["+lang+":dwc:RecordLevel:catalogNumber]=true&filter[fields]["+lang+":dwc:Location:decimalLatitude]=true&filter[fields]["+lang+":dwc:Location:decimalLongitude]=true&filter[fields]["+lang+":dwc:RecordLevel:collectionCode]=true&filter[fields]["+lang+":dwc:Occurrence:recordedBy]=true&filter[fields]["+lang+":dwc:Location:municipality]=true&filter[fields]["+lang+":dwc:Location:stateProvince]=true&filter[fields][id]=true&filter[where][id][inq]=" + specimen_ids[0];
+    // specimen_ids.forEach(function(id){
+    //   specimen_query += "&filter[where][id][inq]=" + id;
+    // });
 
-    $.getJSON("/api/Specimens?" + specimen_query, function(specimens){
-      specimens.forEach(function(specimen, id){        
-        // mapa
-        var p = [specimen[lang+":dwc:Location:decimalLatitude"].value, specimen[lang+":dwc:Location:decimalLongitude"].value];
-        var marker = L.marker(p, {opacity:0.9}).addTo(map);
-        $.getJSON("/api/Collections/"+lang+"%3A"+specimen[lang+":dwc:RecordLevel:institutionCode"].value+"%3A"+specimen[lang+":dwc:RecordLevel:collectionCode"].value,
-            function(collection){
-              w2ui['grid'].add(
-                {
-                recid: specimen[lang+":dwc:RecordLevel:catalogNumber"].value,
-                scientificName: "<i>"+name+"</i>",
-                collectionName: ((collection[lang+":rcpol:Collection:collectionName"]?collection[lang+":rcpol:Collection:collectionName"].value:"")+" - "+(specimen[lang+":dwc:RecordLevel:institutionCode"]?specimen[lang+":dwc:RecordLevel:institutionCode"].value:"")),
-                recordedBy: specimen[lang+":dwc:Occurrence:recordedBy"].value,
-                municipality: specimen[lang+":dwc:Location:municipality"].value + " - " + specimen[lang+":dwc:Location:stateProvince"].value,
-                specimen_id: specimen.id}
-              );
-            });
-        });
-    });
+    // $.getJSON("/api/Specimens?" + specimen_query, function(specimens){
+    //   specimens.forEach(function(specimen, id){        
+    //     // mapa
+    //     var p = [specimen[lang+":dwc:Location:decimalLatitude"].value, specimen[lang+":dwc:Location:decimalLongitude"].value];
+    //     var marker = L.marker(p, {opacity:0.9}).addTo(map);
+    //     $.getJSON("/api/Collections/"+lang+"%3A"+specimen[lang+":dwc:RecordLevel:institutionCode"].value+"%3A"+specimen[lang+":dwc:RecordLevel:collectionCode"].value,
+    //         function(collection){
+    //           w2ui['grid'].add(
+    //             {
+    //             recid: specimen[lang+":dwc:RecordLevel:catalogNumber"].value,
+    //             scientificName: "<i>"+name+"</i>",
+    //             collectionName: ((collection[lang+":rcpol:Collection:collectionName"]?collection[lang+":rcpol:Collection:collectionName"].value:"")+" - "+(specimen[lang+":dwc:RecordLevel:institutionCode"]?specimen[lang+":dwc:RecordLevel:institutionCode"].value:"")),
+    //             recordedBy: specimen[lang+":dwc:Occurrence:recordedBy"].value,
+    //             municipality: specimen[lang+":dwc:Location:municipality"].value + " - " + specimen[lang+":dwc:Location:stateProvince"].value,
+    //             specimen_id: specimen.id}
+    //           );
+    //         });
+    //     });
+    // });
 
   });
 };

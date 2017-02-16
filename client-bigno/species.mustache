@@ -16,7 +16,8 @@
 
 	<!-- Arquivos Grid Tabela de Amostras -->
 	<link rel="stylesheet" type="text/css" href="http://w2ui.com/src/w2ui-1.4.min.css" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
 	<script type="text/javascript" src="http://w2ui.com/src/w2ui-1.4.min.js"></script>
 	
 	<script type="text/javascript" src="/javascript/internacionalization.js"></script>
@@ -25,7 +26,7 @@
 	<link  href="/javascript/fotorama/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
 	<script src="/javascript/fotorama/fotorama.js"></script> <!-- 16 KB -->
 
-    <!-- Javascript Documento -->
+        <!-- Javascript Documento -->
     <script type="text/javascript" src="/javascript/especie.js"></script>
 
     <!-- Início: Códigos para o Mapa e Tabela -->
@@ -125,9 +126,8 @@
 			        readSpecies(id, map);
 					});     
 			});		  		   
-		    
-		  
-		
+
+	
 	</script>
 	<!-- Final: Códigos para o Mapa e Tabela -->
 
@@ -166,10 +166,9 @@
 
 	<!-- Início das informações da espécie -->
 	<article>
-
 	  <!-- Nome da espécie -->
       <h2 class="famesp" id="dwc-Taxon-genus-value"></h2>
-	  <h1> <i> <span id="dwc-Taxon-scientificName-value"></span> </i><span id="dwc-Taxon-scientificNameAuthorship-value"></span></h1>
+	  <h1 class="nomesp"> <i> <span id="dwc-Taxon-scientificName-value"></span> </i><span id="dwc-Taxon-scientificNameAuthorship-value"></span></h1>
 
       <!--Nome popular-->
 	  <h2 class="popname" id="dwc-Taxon-taxonRank-value"></h2>
@@ -327,16 +326,19 @@
 
 
 			<!-- Início: Fotos do Grão de Pólen -->
+			<!--
 			<div class="img-polen">
 				<p class="clique-full">Clique em <img src="/images/{{base}}_full.png"> para ver as imagens em tela cheia</p>
 
 				<h2> <span id="rcpol-ProfilesLabel-profilesImagesOfPollen">Imagens do Gr&atilde;o de P&oacute;len</span>:</h2>
 
 				<div id="foto_polen" class="fotorama" data-allowfullscreen="native" data-width="425" data-maxheight="425">
-	              <!-- <img src="/img/lspm.jpg">-->
+			-->
+	              <!-- <img src="/img/lspm.jpg"> 
 				</div>
 
-			</div>
+			</div> --> 
+			
 			<!-- Final: Fotos do Grão de Pólen -->
 
 		</div>
@@ -345,7 +347,7 @@
 		<!-- Início: Mapa de distribuição -->
 		<div class="mapa">
 
-			<h2> <span id="rcpol-ProfilesLabel-profilesLocalityOfSpecies">Localiza&ccedil;&atilde;o dos Esp&eacute;cimes</span>:</h2>
+			<h2> <span id="bigno-ProfilesLabel-profilesLocalityOfSpecies">Localiza&ccedil;&atilde;o das Esp&eacute;cies</span>:</h2>
 
 			<!-- Início Código Leaflet -->
 			<div id="map" class="esize">
@@ -359,7 +361,7 @@
 		<!-- Início: Amostras -->
 		<div class="amostras">
 
-			<h2> <span id="rcpol-ProfilesLabel-profilesSample">Amostras</span>:</h2>
+			<h2> <span id="bigno-ProfilesLabel-profilesSample">Amostras</span>:</h2>
 
 			<div id="grid"></div>
 
@@ -368,6 +370,7 @@
 
 	        <!-- Início: Visitantes -->
 			<!-- Inserir link para a página da interação: ficha_visitantes_especie.html-->
+			<!--
 			<a href="/ficha_visitantes_especie.html">
 			  <div class="visitantes">		  	
 				<h2 id="rcpol-ProfilesLabel-profilesKnowFlowerVisitors">
@@ -375,7 +378,7 @@
 				</h2>
 
 			  </div>
-			</a>
+			</a> -->
 			<!-- Final: Visitantes -->		
 			<h2 style="margin-bottom:10px" id="bigno-SiteLabel-howToCite">Como citar:</h2>
 			<p id="bigno-SiteLabel-citation">Chaves Interativas Bignoniaceae. Available in:  <<a href=" href="http://chave.bigno.org.br">http://chave.bigno.org.br/</a>>. Date of access: </p>

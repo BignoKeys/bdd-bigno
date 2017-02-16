@@ -249,16 +249,29 @@ hr {
 	color: #645316;
 }
 
+/* Fundo translucido artigo*/
+article {
+	overflow: auto;
+	background-color: white;
+	padding: 40px 50px;
+}
+
 /* Familia Espécie */
 h2.famesp {
-	margin: 0 0 12px 0;
+	margin: 0 0 8px 0;
 	color: #2f3d5d;
 }
 
 /* Nome popular */
 h2.popname {
-	margin: 0 0 25px 0;
-	font-size: 16px;
+	margin: 0 0 8px 0;
+	font-size: 24px;
+}
+
+h1.nomesp {
+	font-size: 24px;
+	margin: 0 0 8px 0;
+
 }
 
 /* Div dos Textos Coluna esquerda */
@@ -311,36 +324,36 @@ div.infos-img {
 
 /* Fotos da Planta */
 div.img-planta {
-	display: none;
+	display: block;
 	float: left;
 	width: 425px;
 	margin: 0 0 0 50px;
 }
 
 div.img-planta-ae {
-	display: none;
+	display: block;
 	float: left;
 	width: 425px;
 	margin: 50px 0 0 50px;
 }
 
 div.img-planta-me {
-	display: none;
+	display: block;
 	float: left;
 	width: 425px;
 	margin: 50px 0 0 50px;
 }
 
 div.img-planta h2 {
-	display: none;
+	display: block;
 }
 
 div.img-planta-ae h2 {
-	display: none;
+	display: block;
 }
 
 div.img-planta-me h2 {
-	display: none;
+	display: block;
 }
 
 /* Mapa */
