@@ -35,7 +35,7 @@
 		var language = "pt-BR";
 		function setLanguage(language){
 			localStorage.language = language;
-			window.location = "/profile/species/{{base}}/"+localStorage.language+":"+id.split(":")[1];
+			window.location = "/profile/species/{{base}}/"+localStorage.language+":"+id.split(":")[1]+":"+id.split(":")[2];
 		}
 	  $(document).ready(function(){
 	  		var internacionalization = new Internacionalization();
