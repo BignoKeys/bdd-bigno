@@ -21,22 +21,76 @@ Released   : 20130504
 <!--[if IE 6]>
 <link href="default_ie6.css" rel="stylesheet" type="text/css" />
 <![endif]-->
+
+	<!-- Css Documento -->
+	<link href="/css/sobre.css" rel="stylesheet" type="text/css">;
+
+	<!-- jQuery -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+	<link rel="stylesheet" href="/bower_components/jquery-ui/themes/base/jquery-ui.min.css">
+
+    <!-- Javascript Documento -->
+    <script type="text/javascript" src="/javascript/internacionalization.js"></script>
+
+    <script type="text/javascript">
+      var lang = "{{lang}}"
+      var base = '{{base}}';
+	  var language = (lang == "")?"pt-BR":lang;	  
+	  function setLanguage(language){
+		localStorage.language = language;
+		window.location = "/profile/about/{{base}}/"+localStorage.language;
+	  	}
+	  
+		window.onload = function(){
+			var internacionalization = new Internacionalization();
+			internacionalization.base = '{{base}}';
+		  	internacionalization.updateLogo();	  	
+
+			if(localStorage && localStorage.language)
+			  language = localStorage.language;
+			$.getJSON("/api/Schemas?filter=%7B%22where%22%3A%7B%22class%22%3A%22SiteLabel%22%2C%22language%22%3A%22"+language+"%22%7D%7D", function(data){
+			  data.forEach(function(label) {
+				$("#"+label.schema+"-"+label["class"]+"-"+label.term).html(label.field);
+			  });
+			});
+			if (typeof(Storage) !== "undefined") {
+			  localStorage.language = localStorage.language?localStorage.language:"pt-BR";
+			  if(language!=localStorage.language)
+				window.location = "/profile/about/"+language;
+			} else {
+			  alert("O seu browswer não suporta alguns recursos utilizados pelo sistema.\nRecomenda-se atualizar browser ou utilizar outro.");
+			}
+		}
+	</script>
+
 </head>
 
 <body>
+
+<!-- Div Menu e Logo -->
 <div id="header-wrapper">
 	<div id="header">
 		<div id="logo">
-			<h1><a href="#">Chaves Interativas Bignoniaceae</a></h1>
+			<h1><a href="/{{base}}" id="bigno-SiteLabel-siteHome">Chaves Interativas Bignoniaceae</a></h1>
 		</div>
 		<div id="menu">
 			<ul>
-				<li ><a href="index.mustache" accesskey="1" title="">Homepage</a></li>
-				<li><a href="glossario.mustache" accesskey="2" title="">Glossário</a></li>
-				<li class="current_page_item"><a href="#" accesskey="3" title="">Sobre</a></li>
-				<!-- <li><a href="#" accesskey="4" title="">Careers</a></li> -->
-				<li><a href="contato.mustache" accesskey="4" title="">Contato</a></li>
+				<li><a href="/{{base}}" id="bigno-SiteLabel-siteIdentificationKey">Chave de identificação de espécies</a></li>
+				<li><a href="/profile/glossary/{{base}}" id="bigno-SiteLabel-siteGlossary">Glossário</a></li>
+				<!--<li><a href="#" id="bigno-SiteLabel-siteAbout">Sobre</a></li> -->
+				<li><a href="/profile/contact/{{base}}" id="bigno-SiteLabel-siteContact">Contato</a></li>
 			</ul>
+		</div>
+		<div id=menu>
+				<ul>
+					<li>
+						<span class="t-lang">
+							<img onclick="setLanguage('pt-BR')"  src="/images/pt_BR.png">
+							<img onclick="setLanguage('en-US')"  src="/images/en_GB.png">
+						</span>
+					</li>
+				</ul>
 		</div>
 	</div>
 </div>
@@ -48,7 +102,7 @@ Released   : 20130504
 <div id="wrapper">
 	<div id="wide-content">
 		<div>
-			<h2>Sobre</h2>
+			<h2 id="bigno-SiteLabel-siteAbout">Sobre</h2>
 
 		</div>
 	</div>

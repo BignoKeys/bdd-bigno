@@ -21,22 +21,75 @@ Released   : 20130504
 <!--[if IE 6]>
 <link href="default_ie6.css" rel="stylesheet" type="text/css" />
 <![endif]-->
+
+	<!-- Css Documento -->
+	<link href="/css/contato.css" rel="stylesheet" type="text/css">;
+
+	<!-- jQuery -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+	<link rel="stylesheet" href="/bower_components/jquery-ui/themes/base/jquery-ui.min.css">
+
+    <!-- Javascript Documento -->
+    <script type="text/javascript" src="/javascript/internacionalization.js"></script>
+    <script type="text/javascript">
+      var lang = "{{lang}}"
+      var base = '{{base}}';
+	  var language = (lang == "")?"pt-BR":lang;	  
+	  function setLanguage(language){
+		localStorage.language = language;
+		window.location = "/profile/contact/{{base}}/"+localStorage.language;
+	  	}
+	  
+		window.onload = function(){
+			var internacionalization = new Internacionalization();
+			internacionalization.base = '{{base}}';
+		  	internacionalization.updateLogo();	  	
+
+			if(localStorage && localStorage.language)
+			  language = localStorage.language;
+			$.getJSON("/api/Schemas?filter=%7B%22where%22%3A%7B%22class%22%3A%22SiteLabel%22%2C%22language%22%3A%22"+language+"%22%7D%7D", function(data){
+			  data.forEach(function(label) {
+				$("#"+label.schema+"-"+label["class"]+"-"+label.term).html(label.field);
+			  });
+			});
+			if (typeof(Storage) !== "undefined") {
+			  localStorage.language = localStorage.language?localStorage.language:"pt-BR";
+			  if(language!=localStorage.language)
+				window.location = "/profile/contact/"+language;
+			} else {
+			  alert("O seu browswer não suporta alguns recursos utilizados pelo sistema.\nRecomenda-se atualizar browser ou utilizar outro.");
+			}
+		}
+	</script>
+
 </head>
 
 <body>
+
+<!-- Div Menu e Logo -->
 <div id="header-wrapper">
 	<div id="header">
 		<div id="logo">
-			<h1><a href="#">Chaves Interativas Bignoniaceae</a></h1>
+			<h1><a href="/{{base}}" id="bigno-SiteLabel-siteHome">Chaves Interativas Bignoniaceae</a></h1>
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="index.mustache" accesskey="1" title="">Homepage</a></li>
-				<li><a href="glossario.mustache" accesskey="2" title="">Glossário</a></li>
-				<li><a href="sobre.mustache" accesskey="3" title="">Sobre</a></li>
-				<!-- <li><a href="#" accesskey="4" title="">Careers</a></li> -->
-				<li class="current_page_item"><a href="#" accesskey="4" title="">Contato</a></li>
+				<li><a href="/{{base}}" id="bigno-SiteLabel-siteIdentificationKey">Chave de identificação de espécies</a></li>
+				<li><a href="/profile/glossary/{{base}}" id="bigno-SiteLabel-siteGlossary">Glossário</a></li>
+				<li><a href="/profile/about/{{base}}" id="bigno-SiteLabel-siteAbout">Sobre</a></li>
+				<!--<li><a href="#" id="bigno-SiteLabel-siteContact">Contato</a></li> -->
 			</ul>
+		</div>
+		<div id=menu>
+				<ul>
+					<li>
+						<span class="t-lang">
+							<img onclick="setLanguage('pt-BR')"  src="/images/pt_BR.png">
+							<img onclick="setLanguage('en-US')"  src="/images/en_GB.png">
+						</span>
+					</li>
+				</ul>
 		</div>
 	</div>
 </div>
@@ -44,18 +97,16 @@ Released   : 20130504
 <div id="banner">
 	<div class="img-border"> <a href="#"><img src="images/header-img.jpg" width="1120" height="300" alt="" /></a> </div>
 </div>
-
+-->
 <div id="wrapper">
 	<div id="wide-content">
 		<div>
-			<h2>Welcome to Yellow Dahlia!</h2>
-			<p>This is <strong>Yellow Dahlia </strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.   The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>
-			<p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Donec condimentum, urna non molestie semper, ligula enim ornare nibh, quis laoreet eros quam eget ante. Aliquam libero. Vivamus nisl nibh, iaculis vitae, viverra sit amet, ullamcorper vitae, turpis. Aliquam erat volutpat. Vestibulum dui sem, pulvinar sed, imperdiet nec, iaculis nec, leo. Fusce odio. Etiam arcu dui, faucibus eget, placerat vel, sodales eget, orci. Donec ornare neque ac sem. Mauris aliquet. </p>
-			<p class="button-style"><a href="#">More Details</a></p>
+			<h2 id="bigno-SiteLabel-siteContact">Contato</h2>
+
 		</div>
 	</div>
 </div>
-
+<!--
 <div id="page-wrapper">
 
 <div id="page" class="container">

@@ -403,6 +403,34 @@ app.get('/profile/glossary/:base', function(req, res){
   res.send(mustache.render(template, params));
 });
 
+//Tradução da pagina About
+app.get('/profile/about/:base/:lang*?', function(req, res){
+  var template = fs.readFileSync('./client-bigno/sobre.mustache', 'utf8');
+  var params = {lang: req.params.lang, base: req.params.base?req.params.base:"bigno"};
+  res.send(mustache.render(template, params));
+});
+
+//Página About
+app.get('/profile/about/:base', function(req, res){
+  var template = fs.readFileSync('./client-bigno/sobre.mustache', 'utf8');
+  var params = {base:req.params.base?req.params.base:"bigno"};
+  res.send(mustache.render(template, params));
+});
+
+//Tradução da pagina Contato
+app.get('/profile/contact/:base/:lang*?', function(req, res){
+  var template = fs.readFileSync('./client-bigno/contato.mustache', 'utf8');
+  var params = {lang: req.params.lang, base: req.params.base?req.params.base:"bigno"};
+  res.send(mustache.render(template, params));
+});
+
+//Página Contato
+app.get('/profile/contact/:base', function(req, res){
+  var template = fs.readFileSync('./client-bigno/contato.mustache', 'utf8');
+  var params = {base:req.params.base?req.params.base:"bigno"};
+  res.send(mustache.render(template, params));
+});
+
 var ds = loopback.createDataSource({
     connector: require('loopback-component-storage'),
     provider: 'filesystem',
