@@ -71,7 +71,7 @@ hr {
 
 #wrapper {
 	overflow: hidden;
-	background: #FFFFFF;
+	background: #F2F2F2 url(/images/bg02.jpg) repeat;
 	border-top: 1px dashed #B69627;
 }
 
@@ -396,4 +396,11 @@ ul.style3 .date {
 ul.style3 .first .date
 {
 	margin-top: 0px;
+}
+
+/* Fundo translucido artigo*/
+article {
+	overflow: auto;
+	background-color: white;
+	padding: 40px 50px;
 }

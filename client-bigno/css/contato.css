@@ -31,6 +31,7 @@ p, ol, ul {
 
 p, ol {
 	line-height: 180%;
+	padding: 5px;
 }
 
 strong {
@@ -71,7 +72,7 @@ hr {
 
 #wrapper {
 	overflow: hidden;
-	background: #FFFFFF;
+	background: #F2F2F2 url(/images/bg02.jpg) repeat;
 	border-top: 1px dashed #B69627;
 }
 
@@ -182,7 +183,7 @@ hr {
 
 #wide-content {
 	overflow: hidden;
-	width: 1120px;
+	width: 1000px;
 	margin: 0px auto;
 	padding: 50px 40px;
 }
@@ -396,4 +397,105 @@ ul.style3 .date {
 ul.style3 .first .date
 {
 	margin-top: 0px;
+}
+
+/* Fundo translucido artigo*/
+article {
+	overflow: auto;
+	background-color: white;
+	padding: 40px 60px;
+
+}
+
+
+form{
+	width: 900px;
+	height:500px;
+
+}
+
+input[type=text] {
+    width: 50%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 14px;
+    background-color: white;
+    background-position: 10px 30px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 20px;
+    float: left;
+
+}
+
+input[type=email] {
+    width: 50%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 14px;
+    background-color: white;
+    background-position: 10px 30px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 20px;
+    float: left;
+
+}
+
+/* Busca */
+.formbusca{
+	float:left;
+	width: 300px;
+	padding-right: 10px;
+	text-align: right;
+}
+
+.fbcampo, .ui-autocomplete-input{
+	margin: 0;
+	padding: 5px 10px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 14px;
+	color: #2f3d5d;
+	border:1px solid #FFAD60;
+	border-right:0px;
+}
+
+::-webkit-input-placeholder {
+   color: #2f3d5d;
+}
+
+:-moz-placeholder { /* Firefox 18- */ 
+   color: #2f3d5d; 
+} 
+
+::-moz-placeholder {  /* Firefox 19+ */ 
+   color: #2f3d5d; 
+}
+
+:-ms-input-placeholder {  
+   color: #2f3d5d; 
+}
+
+.fbbotao {
+	margin: 0;
+	padding: 10px 20px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 13px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 1px 1px 0px #FCE3BB;
+	color: #FFFFFF !important;
+	border-radius: 5px;
+	background: #EBB462;
+	line-height: 17px;
+	float: right;
+
+	/*firefox 18 edge 16*/
+}
+
+textarea{
+	width: 50%;
+	height: 40%;
 }

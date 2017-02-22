@@ -17,11 +17,16 @@ Released   : 20130504
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
 <!-- POLYMER e CUSTUM COMPONENTS -->
+
 <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>	
 <link rel="import" href="bower_components/google-analytics/google-analytics.html">	
 
 <link rel="import" href="/elements/autocomplete-species.html"></script>	
 <link rel="import" href="/elements/autocomplete-descriptors.html"></script>	
+<!-- Slide de Images -->
+
+<link rel="import" href="/elements/polymer-slide.html"></script>	
+<link rel="import" href="/elements/polymer-slideshow.html"></script>	
 
 <!-- Google fonts 
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic|Roboto+Condensed' rel='stylesheet' type='text/css'> -->
@@ -232,7 +237,19 @@ Released   : 20130504
 	</div>
 
 	<div id="banner">
-		<div class="img-border"> <a href="#"><img src="/images/ipe.jpg" width="1120" height="300" alt="" /></a> </div>
+		<div class="img-border">
+			<polymer-slideshow>
+			  <polymer-slide>
+			    <a href="#"><img src="/images/ipe.jpg" width="1120" height="300" alt="" /></a> 
+			  </polymer-slide>
+			  <polymer-slide>
+			    <a href="#"><img src="/images/iperoxoum.jpg" width="1120" height="300" alt="" /></a> 
+			  </polymer-slide>
+			  <polymer-slide>
+			  	 <a href="#"><img src="/images/iperosaum.jpg" width="1120" height="300" alt="" /></a> 
+			  </polymer-slide>
+	    	</polymer-slideshow>
+		</div>
 	</div>
 
 
@@ -342,6 +359,7 @@ Released   : 20130504
 	</div>
 
 </div>
+
 </div>
 
 <div id="footer">
