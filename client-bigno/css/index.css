@@ -338,13 +338,13 @@ hr {
 
 #banner {
 	overflow: hidden;
-	width: 1160px;
+	width: 1130px;
 	margin: 20px auto 50px auto;
 }
 
 #banner .img-border {
 	height: 300px;
-	border: 20px solid #FFFFFF;
+	border: 5px solid #FFFFFF;
 }
 
 /* Button Style */

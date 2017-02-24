@@ -186,9 +186,15 @@ hr {
 	padding: 0px 0px 20px 0px;
 	letter-spacing: -1px;
 	font-size: 36px;
-	color: #222222;
+	
 }
 
+#wide-content h2.nomesp {
+	padding: 0px 0px 20px 0px;
+	letter-spacing: -1px;
+	font-size: 36px;
+	color:#A52A2A;
+}
 
 /** CONTENT */
 
@@ -257,20 +263,22 @@ article {
 }
 
 /* Familia Espécie */
-h2.famesp {
+h1.famesp {
 	margin: 0 0 8px 0;
+	font-size: 28px;
 	color: #2f3d5d;
 }
 
 /* Nome popular */
-h2.popname {
+h1.popname {
 	margin: 0 0 8px 0;
-	font-size: 24px;
+	font-size: 28px;
+	color: #2f3d5d;
 }
 
-h1.nomesp {
-	font-size: 24px;
+h2.nomesp {
 	margin: 0 0 8px 0;
+	color:#A52A2A;
 
 }
 
