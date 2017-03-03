@@ -25,7 +25,7 @@ p, ol, ul {
 }
 
 p, ol {
-	line-height: 180%;
+	line-height: 110%;
 }
 
 strong {
@@ -185,8 +185,8 @@ hr {
 #wide-content h2 {
 	padding: 0px 0px 20px 0px;
 	letter-spacing: -1px;
-	font-size: 36px;
-	
+	font-size: 30px;
+
 }
 
 #wide-content h2.nomesp {
@@ -264,16 +264,16 @@ article {
 
 /* Familia Espécie */
 h1.famesp {
-	margin: 0 0 8px 0;
+	margin: 0 0 4px 0;
 	font-size: 28px;
-	color: #2f3d5d;
+	color: #222222;
 }
 
 /* Nome popular */
 h1.popname {
-	margin: 0 0 8px 0;
-	font-size: 28px;
-	color: #2f3d5d;
+	margin: 0 0 4px 0;
+	font-size: 26px;
+	color: #222222;
 }
 
 h2.nomesp {
@@ -286,15 +286,30 @@ h2.nomesp {
 div.infos-txt {
 	display: block;
 	float: left;
-	width: 425px;
+	width: 450px;
 	overflow: auto;
+}
+
+div.infos-txt h2{
+	color:#A52A2A;
+}
+
+div.infos-txt-right {
+	display: block;
+	float: right;
+	width: 450px;
+	overflow: auto;
+}
+
+div.infos-txt-right h2 {
+	color:#A52A2A;
 }
 
 /* Características da Planta */
 div.info-planta{
-	display: block;
+	display: auto;
 	float: left;
-	width: 425px;
+	width: 450px;
 }
 /* Características da Flor */
 div.info-flor{
@@ -330,6 +345,9 @@ div.infos-img {
 	overflow: auto;
 }
 
+div.infos-img h2{
+	color:#A52A2A;
+}
 /* Fotos da Planta */
 div.img-planta {
 	display: block;
@@ -370,6 +388,10 @@ div.mapa {
 	margin: 0 0 50px 0;
 }
 
+div.mapa h2{
+	color:#A52A2A;
+}
+
 /* Tamanho Mapa Espécie */
 div.esize {
 	height: 450px;
@@ -383,6 +405,11 @@ div.msize {
 }
 
 /* Tamanho Tabela Amostras */
+
+div.amostras h2{
+	color:#A52A2A;
+}
+
 #grid {
 	height: 450px;
 	width: 900px;
@@ -399,7 +426,9 @@ div.graf img {
 	margin: 0 4px 0 0;
 }
 
-
+#bigno-SiteLabel-howToCite{
+	color:#A52A2A;
+}
 
 /* Informações Palinoteca*/
 div.cspm {
