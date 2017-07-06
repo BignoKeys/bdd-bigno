@@ -151,7 +151,7 @@ Identification.prototype.createSpecies = function(callback){
             self.species[sp.id].scientificName = sp[self.internacionalization.language+":dwc:Taxon:scientificName"].value;
             self.species[sp.id].genus = sp[self.internacionalization.language+":dwc:Taxon:genus"].value;
             self.species[sp.id].scientificNameAuthorship = sp[self.internacionalization.language+":dwc:Taxon:scientificNameAuthorship"].value;
-            self.species[sp.id].taxonRank =  sp[self.internacionalization.language + ":dwc:Taxon:taxonRank"].value;
+            //self.species[sp.id].taxonRank =  sp[self.internacionalization.language + ":dwc:Taxon:taxonRank"].value;
             self.species[sp.id].html = $("<div class='especies' id = " + self.species[sp.id].htmlId + "></div>");
             self.species[sp.id].thumbnail = sp[self.internacionalization.language + ":bigno:Image:vegetativeFeaturesImage"]?sp[self.internacionalization.language + ":bigno:Image:vegetativeFeaturesImage"].images[0].thumbnail:
                                             sp[self.internacionalization.language + ":bigno:Image:flowerImage"]?sp[self.internacionalization.language + "bigno:Image:flowerImage"].images[0].thumbnail:
@@ -162,7 +162,7 @@ Identification.prototype.createSpecies = function(callback){
             self.species[sp.id].html.append("<div class='nsp'></div>");
             self.species[sp.id].html.find(".nsp").append("<a href='/profile/species/" + self.base + "/" + sp.id + "' target ='_blank' ><p class='famisp'>" + self.species[sp.id].genus + "</p></a>");
             self.species[sp.id].html.find(".nsp").append("<a href='/profile/species/" + self.base + "/" + sp.id + "' target ='_blank' ><p class='nomesp'><i>" + self.species[sp.id].scientificName + " </i>" + self.species[sp.id].scientificNameAuthorship + "</p></a>");
-            self.species[sp.id].html.find(".nsp").append("<a href='/profile/species/" + self.base + "/" + sp.id + "' target ='_blank' ><p class='popn'>" + self.species[sp.id].taxonRank + "</p></a>");             
+          //  self.species[sp.id].html.find(".nsp").append("<a href='/profile/species/" + self.base + "/" + sp.id + "' target ='_blank' ><p class='popn'>" + self.species[sp.id].taxonRank + "</p></a>");             
         });
         callback();
       });

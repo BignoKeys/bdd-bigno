@@ -135,18 +135,18 @@ $.getJSON("/api/Species/"+ id, function(data){
       }
     });
     // IMAGES
-    if(data[lang+':rcpol:Image:plantImage'] && data[lang+':rcpol:Image:plantImage'].images && data[lang+':rcpol:Image:plantImage'].images.length>0)
-      data[lang+":rcpol:Image:plantImage"].images.forEach(function(media){
+    if(data[lang+':bigno:Image:vegetativeFeaturesImage'] && data[lang+':bigno:Image:vegetativeFeaturesImage'].images && data[lang+':rcpol:Image:plantImage'].images.length>0)
+      data[lang+":bigno:Image:vegetativeFeaturesImage"].images.forEach(function(media){
           $("#foto_planta").append("<img src='" +media.resized+"'/>");
           $("#foto_planta img").attr("style", "max-width:500px; max-height:400px;");
       });
-    if(data[lang+':rcpol:Image:flowerImage'] && data[lang+':rcpol:Image:flowerImage'].images && data[lang+':rcpol:Image:flowerImage'].images.length>0)
-      data[lang+":rcpol:Image:flowerImage"].images.forEach(function(media){
+    if(data[lang+':bigno:Image:flowerImage'] && data[lang+':bigno:Image:flowerImage'].images && data[lang+':bigno:Image:flowerImage'].images.length>0)
+      data[lang+":bigno:Image:flowerImage"].images.forEach(function(media){
           $("#foto_planta").append("<img src='" +media.resized+"'/>");
           $("#foto_planta img").attr("style", "max-width:500px; max-height:400px;");
       });
-    if(data[lang+':rcpol:Image:pollenImage'] && data[lang+':rcpol:Image:pollenImage'].images && data[lang+':rcpol:Image:pollenImage'].images.length>0)
-      data[lang+":rcpol:Image:pollenImage"].images.forEach(function(media){
+    if(data[lang+':bigno:Image:fruitImage'] && data[lang+':bigno:Image:fruitImage'].images && data[lang+':fruit:Image:pollenImage'].images.length>0)
+      data[lang+":bigno:Image:pollenImage"].images.forEach(function(media){
           $("#foto_polen").append("<img src='" +media.resized+"'/>");
       });
     if(data[lang+':rcpol:Image:allPollenImage'] && data[lang+':rcpol:Image:allPollenImage'].images && data[lang+':rcpol:Image:allPollenImage'].images.length>0)

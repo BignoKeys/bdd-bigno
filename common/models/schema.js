@@ -90,7 +90,7 @@ module.exports = function(Schema) {
               callback();
             });
           } else {
-            console.error("record id could not be generated: ".concat(line[0], " ", line[1], " ", line[2]));
+            console.error("record id could not be generated: ".concat(line[0], " ", line[1], " ", line[2]," ", response.order));
             callback();
           }
         }, function done(){

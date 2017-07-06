@@ -491,7 +491,246 @@ module.exports = function(Species) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
 
+  Species.downloadImages = function (cb) {
+    //Schema aqui vai realizar uma consulta no banco de dados pegando os valores chave e valor do registro.
+    //Pelo record.image (que vai conter a url de download da image) e record.id (identificador do documento)
+    //Onde a imagem vai ser salva na pasta do cliente
+    var startTime = new Date();
+    Species.find({where:{or:[{"pt-BR:bigno:Image:vegetativeFeaturesImage":{exists:true}},{"pt-BR:bigno:Image:flowerImage":{exists:true}},
+    {"pt-BR:bigno:Image:fruitImage":{exists:true}},{"pt-BR:bigno:Image:ecologyImage":{exists:true}},{"pt-BR:bigno:Image:distributionImage":{exists:true}}]},
+    fields:{"pt-BR:bigno:Image:vegetativeFeaturesImage":true,"pt-BR:bigno:Image:flowerImage":true,
+    "pt-BR:bigno:Image:fruitImage":true, "pt-BR:bigno:Image:ecologyImage":true,"pt-BR:bigno:Image:distributionImage":true}}, function(err,results){    
+      
+      var i = 0;
+      console.time("download");
+      var queue = async.queue(function(img,callback) {
+        console.log("PROCESSED: ",i++);
+        console.timeEnd("download");
+        var downloader = new ImageDownloader(); 
+        downloader.download(img,callback);
+      },5);
 
+      results.forEach(function (result){
+        if(result["pt-BR:bigno:Image:vegetativeFeaturesImage"]){
+            result["pt-BR:bigno:Image:vegetativeFeaturesImage"].images.forEach(function (img){
+             queue.push(img);
+            });
+        }
+        if(result["pt-BR:bigno:Image:flowerImage"]){
+            result["pt-BR:bigno:Image:flowerImage"].images.forEach(function (img){
+              queue.push(img);
+            });
+        }
+        if(result["pt-BR:bigno:Image:fruitImage"]){
+            result["pt-BR:bigno:Image:fruitImage"].images.forEach(function (img){
+              queue.push(img);
+            });
+        }
+        if(result["pt-BR:bigno:Image:ecologyImage"]){
+            result["pt-BR:bigno:Image:ecologyImage"].images.forEach(function (img){
+             queue.push(img);
+            });
+        }
+        if(result["pt-BR:bigno:Image:distributionImage"]){
+            result["pt-BR:bigno:Image:distributionImage"].images.forEach(function (img){
+              queue.push(img);
+            });
+        }
+      });            
+    });
+  };
+  function ImageDownloader() {
+    EventEmitter.call(this);
+    this.log = [];
+    this.count = 0;    
+    this.requestErrorCount = 0;
+  }
+  util.inherits(ImageDownloader, EventEmitter);
+  ImageDownloader.prototype.download = function(img,callback) {    
+    var self = this;    
+    var image = new Image(img);     
+    image.checkIfExist(image.localPath,function(exists) {      
+      if(exists) image.emit("exists"); 
+      else image.emit("doesNotExist");
+    });
+    image.on("exists", function() {
+        console.log("Existe original "+image.local);        
+        self.count++;        
+        image.checkIfExist(image.thumbnailPath,function(exists) {
+          if(exists){      
+            console.log("Existe thumbnail "+image.thumbnailPath);              
+            image.checkIfExist(image.resizedPath,function(exists) {
+              if(exists) {
+                console.log("Existe resized "+image.thumbnailPath); 
+                callback();                 
+              }
+              else image.emit("localFileWrote");
+            });
+          } else {
+            image.emit("localFileWrote");
+          }
+        });            
+      })
+    .on("doesNotExist",image.requestFromURL)
+    .on("endDownload", function() {
+          image.writeLocalFile();
+          self.count++;            
+      })
+    .on("localFileWrote",
+      function() {        
+        image.convertResized().on("resizedFileWrote",function() {
+          image.convertThumbnail().on("thumbnailFileWrote",function() {
+            callback();
+          });          
+        });        
+        // self.log = self.log.concat(image.log)
+      })
+    .on("writeError",function() {
+      callback();
+    });
+    return this;
+  };
+  function Image(img) {    
+    EventEmitter.call(this);
+    this.log = [];
+    this.count = 0;
+    this.img = img;
+    this.requestErrorCount = 0;
+    this.writeLocalErrorCount = 0;
+    this.writeResizedErrorCount = 0;
+    this.writeThumbnailErrorCount = 0;
+    this.original = img.original;
+    this.local = img.local;
+    this.resized = img.resized;
+    this.thumbnail = img.thumbnail;
+    this.localPath = __dirname + "/../../client-bigno"+this.local;
+    this.thumbnailPath = __dirname + "/../../client-bigno"+this.thumbnail;
+    this.resizedPath = __dirname + "/../../client-bigno"+this.resized;
+  }
+  util.inherits(Image, EventEmitter);
+  Image.prototype.checkIfExist = function(path,cb) {
+    var self = this;
+    fs.exists(path, function(exists){
+      cb(exists);        
+    });
+    // return this;
+  };
+  Image.prototype.requestFromURL = function() {
+    var self = this;
+    request(self.original, {encoding: 'binary'}, function(err, response, body){
+      if (err){
+        if (self.requestErrorCount==10) {
+          console.log("Error to download "+self.original);
+          self.requestErrorCount == 0;
+          self.log.push("Error no download de "+self.original);
+          return self.emit("endDownload");
+        } else {
+          self.requestErrorCount++;
+          self.requestFromURL();
+        }
+      } else {
+        self.downloadedContent = body;
+        return self.emit("endDownload");
+      }
+    });
+    return this;
+  }
+  Image.prototype.writeLocalFile = function() {    
+    var self = this;
+    fs.writeFile("client-bigno"+self.local, self.downloadedContent, 'binary', function(err){
+        if(err){
+          if(self.writeLocalErrorCount==10){
+            console.log("******** Local: "+self.local);
+            console.log('Ops, um erro ocorreu!');
+            console.log("URL: ",self.original);
+            console.log("********");
+            self.log.push("Write Local File: "+self.local+"   URL: "+self.original);
+            self.writeLocalErrorCount = 0;
+          } else {
+            self.writeLocalErrorCount++
+            self.writeLocalFile();
+          }
+        } else {
+          var buffer = readChunk.sync("client-bigno"+self.local, 0, 120);  
+          //Checar se a imagem salva é um arquivo jpeg, caso não seja requisitar o endereço da imagem novamente
+          if (imageType(buffer)==null){
+            if(self.writeLocalErrorCount==10){              
+              console.log("******** Local: "+self.local);
+              console.log('Ops, um erro ocorreu!');
+              console.log("URL: ",self.original);
+              console.log("********");
+              self.log.push("Write Local File: "+self.local+"   URL: "+self.original);
+              self.writeLocalErrorCount = 0;
+              self.emit("writeError");
+            } else {
+              self.writeLocalErrorCount++
+              self.writeLocalFile();
+            }
+          }else{            
+            self.emit("localFileWrote");
+          }  
+        }
+    });
+    return this;
+  }
+  Image.prototype.convertResized = function() {
+    var self = this;
+    qt.convert({src:self.localPath, dst: self.resizedPath, width:1500}, function(err, filename){
+      if(err){
+        if(self.writeResizedErrorCount==3){
+          console.log("******** RESIZED: "+self.resized);
+          console.log('Ops, um erro ocorreu!');
+          console.log("******** Local: "+self.local);
+          console.log("URL: ",self.original);
+          console.log("********");
+          self.log.push("Write Resized File: "+self.resized+"   Local: "+self.local+"   URL: "+self.original);
+          self.writeResizedErrorCount = 0;
+          self.emit("writeError");
+        } else {
+          self.writeResizedErrorCount++
+          self.convertResized();
+        }
+      } else {        
+        self.emit("resizedFileWrote");
+      }
+    });
+    return this;
+  }
+  Image.prototype.convertThumbnail = function() {
+    var self = this;
+    qt.convert({src:self.resizedPath, dst: self.thumbnailPath, width:100, height:100}, function(err, filename){
+      if(err){
+        if(self.writeThumbnailErrorCount==3){
+          console.log("******** THUMBNAIL: "+self.thumbnail);
+          console.log('Ops, um erro ocorreu!');
+          console.log("******** Local: "+self.local);
+          console.log("URL: ",self.original);
+          console.log("********");
+          self.log.push("Write Thumbnail File: "+self.thumbnail+"   Local: "+self.local+"   URL: "+self.original);
+          self.writeThumbnailErrorCount = 0;
+          self.emit("writeError");
+        } else {
+          self.writeThumbnailErrorCount++
+          self.convertThumbnail();
+        }
+      } else {        
+        self.emit("thumbnailFileWrote");
+      }
+    });
+    return this;
+  }
+
+  Species.remoteMethod(
+    'downloadImages',
+    {
+      http: {path: '/downloadImages', verb: 'get'},
+      accepts: [
+        // {arg:'download'}
+        // {arg: 'download', type: 'boolean', required:true, description: 'true para baixar todas as imagens. false para baixar somente imagens novas. default: false', default: true}
+      ],
+      returns: {arg: 'response', type: 'object'}
+    }
+  );
   //Criar função pra agregar ficha de especie com fichas de especimes
 
 };
