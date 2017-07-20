@@ -185,7 +185,7 @@ hr {
 #wide-content h2 {
 	padding: 0px 0px 20px 0px;
 	letter-spacing: -1px;
-	font-size: 30px;
+	font-size: 28px;
 
 }
 
@@ -193,7 +193,7 @@ hr {
 	padding: 0px 0px 20px 0px;
 	letter-spacing: -1px;
 	font-size: 36px;
-	color:#A52A2A;
+	color:#228B22;
 }
 
 /** CONTENT */
@@ -265,7 +265,7 @@ article {
 /* Familia Espécie */
 h1.famesp {
 	margin: 0 0 4px 0;
-	font-size: 28px;
+	font-size: 32px;
 	color: #222222;
 }
 
@@ -278,7 +278,7 @@ h1.popname {
 
 h2.nomesp {
 	margin: 0 0 8px 0;
-	color:#A52A2A;
+	color:#228B22;
 
 }
 

@@ -135,7 +135,7 @@ $.getJSON("/api/Species/"+ id, function(data){
       }
     });
     // IMAGES
-    if(data[lang+':bigno:Image:vegetativeFeaturesImage'] && data[lang+':bigno:Image:vegetativeFeaturesImage'].images && data[lang+':rcpol:Image:plantImage'].images.length>0)
+    if(data[lang+':bigno:Image:vegetativeFeaturesImage'] && data[lang+':bigno:Image:vegetativeFeaturesImage'].images && data[lang+':bigno:Image:vegetativeFeaturesImage'].images.length>0)
       data[lang+":bigno:Image:vegetativeFeaturesImage"].images.forEach(function(media){
           $("#foto_planta").append("<img src='" +media.resized+"'/>");
           $("#foto_planta img").attr("style", "max-width:500px; max-height:400px;");
@@ -145,13 +145,17 @@ $.getJSON("/api/Species/"+ id, function(data){
           $("#foto_planta").append("<img src='" +media.resized+"'/>");
           $("#foto_planta img").attr("style", "max-width:500px; max-height:400px;");
       });
-    if(data[lang+':bigno:Image:fruitImage'] && data[lang+':bigno:Image:fruitImage'].images && data[lang+':fruit:Image:pollenImage'].images.length>0)
-      data[lang+":bigno:Image:pollenImage"].images.forEach(function(media){
-          $("#foto_polen").append("<img src='" +media.resized+"'/>");
+    if(data[lang+':bigno:Image:fruitImage'] && data[lang+':bigno:Image:fruitImage'].images && data[lang+':bigno:Image:fruitImage'].images.length>0)
+      data[lang+":bigno:Image:fruitImage"].images.forEach(function(media){
+          $("#foto_planta").append("<img src='" +media.resized+"'/>");
       });
-    if(data[lang+':rcpol:Image:allPollenImage'] && data[lang+':rcpol:Image:allPollenImage'].images && data[lang+':rcpol:Image:allPollenImage'].images.length>0)
-      data[lang+":rcpol:Image:allPollenImage"].images.forEach(function(media){
-          $("#foto_polen").append("<img src='" +media.resized+"'/>");
+    if(data[lang+':bigno:Image:ecologyImage'] && data[lang+':bigno:Image:ecologyImage'].images && data[lang+':bigno:Image:ecologyImage'].images.length>0)
+      data[lang+":bigno:Image:ecologyImage"].images.forEach(function(media){
+          $("#foto_planta").append("<img src='" +media.resized+"'/>");
+      });
+    if(data[lang+':bigno:Image:distributionImage'] && data[lang+':bigno:Image:distributionImage'].images && data[lang+':bigno:Image:distributionImage'].images.length>0)
+      data[lang+":bigno:Image:distributionImage"].images.forEach(function(media){
+          $("#foto_planta").append("<img src='" +media.resized+"'/>");
       });
     $(".fotorama").fotorama();
 
