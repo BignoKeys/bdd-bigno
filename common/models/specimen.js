@@ -56,15 +56,15 @@ module.exports = function(Specimen) {
               // console.log("finish pt-BR");
               callbackSave();
             });
-          },
-          function(callbackSave) {
-            // console.log("start es-ES",line);
-            //para salvar em espanhol
-            saveRecord(base, language,"es-ES",line, schema, class_, terms, function() {
-              // console.log("finish es-ES");
-              callbackSave();
-            });
-          }
+          }//,
+          // function(callbackSave) {
+          //   // console.log("start es-ES",line);
+          //   //para salvar em espanhol
+          //   saveRecord(base, language,"es-ES",line, schema, class_, terms, function() {
+          //     // console.log("finish es-ES");
+          //     callbackSave();
+          //   });
+          // }
         ],function done() {
           console.log("COUTING: ",response.count++);
           callback(); //retorno da função
@@ -89,7 +89,7 @@ module.exports = function(Specimen) {
     var Schema = Specimen.app.models.Schema; //usando o schema
     var c = 0;
     var record = {}; //dados as serem gravados no banco
-    record.id = Specimen.app.defineSpecimenID(language,line[1],line[2],line[3]); //definição do id do specimen
+    record.id = Specimen.app.defineSpecimenID(language,line[1],line[2],line[5]); //definição do id do specimen
     if(record.id){   //se o id existir execute
       //para termo da planilha
       async.each(terms, function(term, callbackCell){
@@ -161,6 +161,7 @@ module.exports = function(Specimen) {
                 // OTHER FIELDS
                 } else {
                 record[schema.id].value = value;
+
                 // EVENT DATE
                 if(schema.term=="eventDate"){
                   var parsedDate = record[schema.id].value.split("-");
@@ -192,21 +193,6 @@ module.exports = function(Specimen) {
                         }
                         record[schemaId].images.push(image);
                     });
-
-                    //Função antiga
-                    // record[schema.id].value.split("|").forEach(function(value){
-                    //   recebe o nome da imagem
-                    //   record[schema.id].name = schema.category + value.replace("https://drive.google.com/open?id=", "");
-                    //   recebe o valor da imagem
-                    //   if(typeof value === "string"){
-                    //     record[schema.id].url = value.replace("https://drive.google.com/open?id=","https://docs.google.com/uc?id=");
-                    //   }
-                    //    save images
-                    //   var image = {url: record[schema.id].url, term:schema.term ,name: record[schema.id].name};
-                    //   if(language==originalLanguage){
-                    //     downloadQueue.push(image); //recebe as imagens
-                    //   }
-                    // });
 
                   }else
                   // REFERENCE
@@ -266,7 +252,7 @@ module.exports = function(Specimen) {
         });
       });
     } else {
-      console.log("Cannot define an ID for specimen: ",language,line[1],line[2],line[3]);
+      console.log("Cannot define an ID for specimen: ",language,line[1],line[2],line[5]);
       callback();
     }
   }
@@ -276,10 +262,10 @@ module.exports = function(Specimen) {
     //Pelo record.image (que vai conter a url de download da image) e record.id (identificador do documento)
     //Onde a imagem vai ser salva na pasta do cliente
     var startTime = new Date();
-    Specimen.find({where:{or:[{"pt-BR:rcpol:Image:allPollenImage":{exists:true}},{"pt-BR:rcpol:Image:plantImage":{exists:true}},
-    {"pt-BR:rcpol:Image:flowerImage":{exists:true}},{"pt-BR:rcpol:Image:beeImage":{exists:true}},{"pt-BR:rcpol:Image:pollenImage":{exists:true}}]},
-    fields:{"pt-BR:rcpol:Image:allPollenImage":true,"pt-BR:rcpol:Image:plantImage":true,
-    "pt-BR:rcpol:Image:flowerImage":true, "pt-BR:rcpol:Image:beeImage":true,"pt-BR:rcpol:Image:pollenImage":true}}, function(err,results){    
+    Specimen.find({where:{or:[{"pt-BR:bigno:Image:vegetativeFeaturesImage":{exists:true}},{"pt-BR:bigno:Image:flowerImage":{exists:true}},
+    {"pt-BR:bigno:Image:fruitImage":{exists:true}},{"pt-BR:bigno:Image:ecologyImage":{exists:true}},{"pt-BR:bigno:Image:distributionImage":{exists:true}},{"pt-BR:bigno:Image:excicataImage":{exists:true}}]},
+    fields:{"pt-BR:bigno:Image:vegetativeFeaturesImage":true,"pt-BR:bigno:Image:flowerImage":true,
+    "pt-BR:bigno:Image:fruitImage":true, "pt-BR:bigno:Image:ecologyImage":true,"pt-BR:bigno:Image:distributionImage":true,"pt-BR:bigno:Image:excicataImage":true}}, function(err,results){    
       
       var i = 0;
       console.time("download");
@@ -291,28 +277,33 @@ module.exports = function(Specimen) {
       },5);
 
       results.forEach(function (result){
-        if(result["pt-BR:rcpol:Image:allPollenImage"]){
-            result["pt-BR:rcpol:Image:allPollenImage"].images.forEach(function (img){
+        if(result["pt-BR:bigno:Image:vegetativeFeaturesImage"]){
+            result["pt-BR:bigno:Image:vegetativeFeaturesImage"].images.forEach(function (img){
              queue.push(img);
             });
         }
-        if(result["pt-BR:rcpol:Image:flowerImage"]){
-            result["pt-BR:rcpol:Image:flowerImage"].images.forEach(function (img){
+        if(result["pt-BR:bigno:Image:flowerImage"]){
+            result["pt-BR:bigno:Image:flowerImage"].images.forEach(function (img){
               queue.push(img);
             });
         }
-        if(result["pt-BR:rcpol:Image:plantImage"]){
-            result["pt-BR:rcpol:Image:plantImage"].images.forEach(function (img){
+        if(result["pt-BR:bigno:Image:fruitImage"]){
+            result["pt-BR:bigno:Image:fruitImage"].images.forEach(function (img){
               queue.push(img);
             });
         }
-        if(result["pt-BR:rcpol:Image:beeImage"]){
-            result["pt-BR:rcpol:Image:beeImage"].images.forEach(function (img){
+        if(result["pt-BR:bigno:Image:ecologyImage"]){
+            result["pt-BR:bigno:Image:ecologyImage"].images.forEach(function (img){
              queue.push(img);
             });
         }
-        if(result["pt-BR:rcpol:Image:pollenImage"]){
-            result["pt-BR:rcpol:Image:pollenImage"].images.forEach(function (img){
+        if(result["pt-BR:bigno:Image:distributionImage"]){
+            result["pt-BR:bigno:Image:distributionImage"].images.forEach(function (img){
+              queue.push(img);
+            });
+        }
+        if(result["pt-BR:bigno:Image:excicataImage"]){
+            result["pt-BR:bigno:Image:excicataImage"].images.forEach(function (img){
               queue.push(img);
             });
         }
@@ -553,8 +544,8 @@ module.exports = function(Specimen) {
       http: {path: '/xlsx/inputFromURL', verb: 'get'},
       accepts: [
         {arg: 'url', type: 'string', required:true, description: 'link para tabela de espécimes'},
-        {arg: 'language', type: 'string', required:true, description: 'en-US, pt-BR ou es-ES'},
-        {arg: 'base', type: 'string', required:true, description: 'eco ou taxon'}
+        {arg: 'language', type: 'string', required:true, description: 'en-US ou pt-BR'},
+        {arg: 'base', type: 'string', required:true, description: 'bigno'}
        // {arg: 'redownload', type: 'boolean', required:false, description: 'true para baixar todas as imagens. false para baixar somente imagens novas. default: false', default: false}
       ],
       returns: {arg: 'response', type: 'object'}

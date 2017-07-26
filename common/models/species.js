@@ -12,42 +12,6 @@ var util = require('util');
 
 module.exports = function(Species) {
 
-  // Imagem principal das species - para comentar
-  // Species.mainImage = function(id,cb) {
-  //   Species.findById(id, function (err, data) {
-  //     if(err) throw new Error(err);
-  //     var url = "";
-  //     if(data["dwc:associatedMedia"]){ //Midia associada - mudar schema para bigno
-  //       // ensure it is an array
-  //       var associatedMedia = data["dwc:associatedMedia"];
-  //       if (!(Array.isArray(associatedMedia))) associatedMedia = [associatedMedia];
-  //       if(associatedMedia.length>0){
-  //         associatedMedia.forEach(function(media){
-  //           if (media.category == "Flor"){ //para categoria Flor 
-  //             var url = "/thumbnails/" + media.name + ".jpg";
-  //             cb(err, url);
-  //           }
-  //         });
-  //       } else {
-  //         cb(err, url);
-  //       }
-  //     } else {
-  //       cb(err, url);
-  //     }
-  //   });
-  // };
-
-  // Species.remoteMethod(
-  //   'mainImage',
-  //   {
-  //     http: {path: '/mainImage', verb: 'get'},
-  //     accepts: [
-  //       {arg: 'id', type: 'array', required:true}
-  //     ],
-  //     returns: {arg: 'response', type: 'string'}
-  //   }
-  // );
-
   //Agregação de species, pela base e pelo nome científico
   Species.fromSpecimensAggregation = function(base,filter,cb) {
     async.parallel([
@@ -66,14 +30,14 @@ module.exports = function(Species) {
             callback();
           });
         });
-      },
-      function es(callback) {
-        selectScientificNames(base,"es-ES",filter,function (scientificNames) {
-          generateSpecies(base,"es-ES",scientificNames,function(species) {
-            callback();
-          });
-        });
-      }
+      // },
+      // function es(callback) {
+      //   selectScientificNames(base,"es-ES",filter,function (scientificNames) {
+      //     generateSpecies(base,"es-ES",scientificNames,function(species) {
+      //       callback();
+      //     });
+      //   });
+     }
     ],function done() {
       cb(null,"done");
     });
@@ -92,7 +56,7 @@ module.exports = function(Species) {
   );
 
   //Gera as species
-  function generateSpecies(base, language,sciName,cb) {
+  function generateSpecies(base,language,sciName,cb) {
     //pega as especimes
     var Specimen = Species.app.models.Specimen;
     var count = 0;
@@ -102,24 +66,25 @@ module.exports = function(Species) {
       query.where[language+":dwc:Taxon:scientificName.value"] = name; //seleciona o nome científico para cada linguagem
       query.where.base = base; //seleciona a base
       Specimen.find(query, function (err,specimens) {
+        console.log(specimens);
 
         var species = {}; //especies a serem salvas no banco de dados
         species.specimens = []; //especimes relacionadas 
         species["language"] = language; //linguagem       
-        species[language+":dwc:Taxon:family"] = specimens[0][language+":dwc:Taxon:family"]; //Familia da especie
+        species[language+":dwc:Taxon:genus"] = specimens[0][language+":dwc:Taxon:genus"]; //Familia da especie
         species.base = base; //base pertecente
         species[language+":dwc:Taxon:scientificName"] = specimens[0][language+":dwc:Taxon:scientificName"]; //nome científico
-        species[language+":dwc:Taxon:scientifimcNameAuthorship"] = specimens[0][language+":dwc:Taxon:scientificNameAuthorship"]; //nome dos autores
+        species[language+":dwc:Taxon:scientificNameAuthorship"] = specimens[0][language+":dwc:Taxon:scientificNameAuthorship"]; //nome dos autores
         // TODO multiple specimens with different popular names
-        species[language+":dwc:Taxon:vernacularName"] = specimens[0][language+":dwc:Taxon:vernacularName"]; //nome usual
+        species[language+":dwc:Taxon:taxonRank"] = specimens[0][language+":dwc:Taxon:taxonRank"]; //nome usual
 
-        species[language+":dwc:Occurrence:establishmentMean"] = specimens[0][language+":dwc:Occurrence:establishmentMean"]; 
-        species[language+":rcpol:Sample:floweringPeriod"] = specimens[0][language+":rcpol:Sample:floweringPeriod"]; //TODO isso é uma caracteristica da especie ou do especime?
-        species[language+":rcpol:Image:plantImage"] = specimens[0][language+":rcpol:Image:plantImage"];
-        species[language+":rcpol:Image:flowerImage"] = specimens[0][language+":rcpol:Image:flowerImage"];
-        species[language+":rcpol:Image:beeImage"] = specimens[0][language+":rcpol:Image:beeImage"];
-        species[language+":rcpol:Image:pollenImage"] = specimens[0][language+":rcpol:Image:pollenImage"];
-        species[language+":rcpol:Image:allPollenImage"] = specimens[0][language+":rcpol:Image:allPollenImage"];
+        species[language+":bigno:Sample:phenology"] = specimens[0][language+":bigno:Sample:phenology"]; 
+        species[language+":bigno:Image:vegetativeFeaturesImage"] = specimens[0][language+":bigno:Image:vegetativeFeaturesImage"]; //TODO isso é uma caracteristica da especie ou do especime?
+        species[language+":bigno:Image:fruitImage"] = specimens[0][language+":bigno:Image:fruitImage"];
+        species[language+":bigno:Image:flowerImage"] = specimens[0][language+":bigno:Image:flowerImage"];
+        species[language+":bigno:Image:ecologyImage"] = specimens[0][language+":bigno:Image:ecologyImage"];
+        species[language+":bigno:Image:distributionImage"] = specimens[0][language+":bigno:Image:distributionImage"];
+        species[language+":bigno:Image:excicataImage"] = specimens[0][language+":bigno:Image:excicataImage"];
         specimens.forEach(function (sp) {
           species.specimens.push({id:sp.id});
           Object.keys(sp).forEach(function(key,index) {
@@ -145,6 +110,12 @@ module.exports = function(Species) {
                     var sd = parseFloat(values[2].trim().slice(4).replace(",","."));
                     species[key].numerical = {min: min, max: max, avg:avg, sd:sd};
                   }
+                }
+              } else if(sp[key].class=="Reference"){
+                if(species[key]){
+                  species[key].references.concat(sp[key].references);
+                }else{
+                  species[key] = sp[key];
                 }
               } else if(sp[key].class=="Image"){
                 if(species[key]){
@@ -182,6 +153,7 @@ module.exports = function(Species) {
         console.log(err,groupByRecords);
       } else {
         cb(groupByRecords.map(function(item) {
+          //console.log("Resultado da consulta: ", item._id.value);
           return item._id.value;
         }));
       }
@@ -497,9 +469,9 @@ module.exports = function(Species) {
     //Onde a imagem vai ser salva na pasta do cliente
     var startTime = new Date();
     Species.find({where:{or:[{"pt-BR:bigno:Image:vegetativeFeaturesImage":{exists:true}},{"pt-BR:bigno:Image:flowerImage":{exists:true}},
-    {"pt-BR:bigno:Image:fruitImage":{exists:true}},{"pt-BR:bigno:Image:ecologyImage":{exists:true}},{"pt-BR:bigno:Image:distributionImage":{exists:true}}]},
+    {"pt-BR:bigno:Image:fruitImage":{exists:true}},{"pt-BR:bigno:Image:ecologyImage":{exists:true}},{"pt-BR:bigno:Image:distributionImage":{exists:true}}, {"pt-BR:bigno:Image:excicataImage":{exists:true}}]},
     fields:{"pt-BR:bigno:Image:vegetativeFeaturesImage":true,"pt-BR:bigno:Image:flowerImage":true,
-    "pt-BR:bigno:Image:fruitImage":true, "pt-BR:bigno:Image:ecologyImage":true,"pt-BR:bigno:Image:distributionImage":true}}, function(err,results){    
+    "pt-BR:bigno:Image:fruitImage":true, "pt-BR:bigno:Image:ecologyImage":true,"pt-BR:bigno:Image:distributionImage":true,"pt-BR:bigno:Image:excicataImage":true}}, function(err,results){    
       
       var i = 0;
       console.time("download");
@@ -533,6 +505,11 @@ module.exports = function(Species) {
         }
         if(result["pt-BR:bigno:Image:distributionImage"]){
             result["pt-BR:bigno:Image:distributionImage"].images.forEach(function (img){
+              queue.push(img);
+            });
+        }
+        if(result["pt-BR:bigno:Image:excicataImage"]){
+            result["pt-BR:bigno:Image:excicataImage"].images.forEach(function (img){
               queue.push(img);
             });
         }
