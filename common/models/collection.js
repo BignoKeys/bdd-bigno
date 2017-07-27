@@ -210,6 +210,7 @@ module.exports = function(Collection) {
     });
     request(url).pipe(w);
   };
+
   Collection.remoteMethod(
     'inputFromURL',
     {
@@ -221,6 +222,46 @@ module.exports = function(Collection) {
       returns: {arg: 'response', type: 'object'}
     }
   );
+
+//  Criação de informações de coleção a partir da ficha de especimes
+  Collection.fromAggregationCollection = function(base, filter, cb){
+    async.parallel([
+      function en(callback) {
+        //seleciona os nomes científicos
+        selectInstitutionCode(base,"en-US",filter,function (institutionCodes) {
+          //gera as especies 
+          generateCollection(base,"en-US",institutionCodes,function(collections) {
+            callback();
+          });
+        });
+      },
+      function pt(callback) {
+        selectInstitutionCode(base,"pt-BR",filter,function (institutionCodes) {
+          generateCollection(base,"pt-BR",institutionCodes,function(collections) {
+            callback();
+          });
+        });
+
+    }
+    ],function done() {
+      cb(null,"done");
+    });
+  };
+
+
+  Collection.remoteMethod(
+    'fromAggregationCollection',
+    {
+      http: {path: '/fromAggregationCollection', verb: 'get'},
+      accepts: [
+        {arg: 'base', type: 'string', required:true},
+        {arg: 'filter', type: 'array', required:false}
+      ],
+      returns: {arg: 'response', type: 'object'}
+    }
+  );
+
+
   function toString(arg) {
     return (typeof arg == 'undefined')?'':String(arg).trim();
   }
@@ -252,4 +293,60 @@ module.exports = function(Collection) {
       console.log("Dataset saved: "+instance.id);
     });
   }
-};
+
+
+  //Seleciona código da instituição
+  function selectInstitutionCode(base,language,filter,cb) {
+    var Specimen = Collection.app.models.Specimen;
+    var sp = Specimen.getDataSource().connector.collection(Specimen.modelName);
+    sp.aggregate({'$match':{'language': language,base:base}},{
+      $group: {
+        _id: { value: '$'+language+':dwc:RecordLevel:institutionCode.value'}
+      }
+    }, function(err, groupByRecords) {
+      if(err) {
+        console.log(err,groupByRecords);
+      } else {
+        cb(groupByRecords.map(function(item) {
+          //console.log("Resultado da consulta: ", item._id.value);
+          return item._id.value;
+        }));
+      }
+    });
+  }
+
+  //Gera código das coleções
+  function generateCollection(base,language,intCode,cb) {
+      //pega as especimes
+    var Specimen = Collection.app.models.Specimen;
+    var count = 0;
+    async.each(intCode, function iterator(name, callback){
+      //seleciona as especimes com os nomes cientificos
+      var query = {where:{}};
+      query.where[language+":dwc:RecordLevel:institutionCode.value"] = name; //seleciona o nome científico para cada linguagem
+      query.where.base = base; //seleciona a base
+      Specimen.find(query, function (err,specimens) {
+
+        var record = {}; //coleções a serem salvas no banco de dados
+        record["language"] = language; //linguagem
+        record.collectionName = name;       
+        record[language+":dwc:RecordLevel:institutionCode"] = specimens[0][language+":dwc:RecordLevel:institutionCode"];
+        record.base = base; //base pertecente
+        record[language+":dwc:RecordLevel:collectionCode"] = specimens[0][language+":dwc:RecordLevel:collectionCode"];        
+        
+        record.id = Collection.app.defineCollectionID(language,name,record[language+":dwc:RecordLevel:collectionCode"].value);
+        
+        Collection.upsert(record,function (err,instance) {
+          if(err)
+            console.log(err);
+          count++;
+          callback();
+        });
+      });
+    }, function done(){
+      cb(count);
+    });
+
+  }
+
+}

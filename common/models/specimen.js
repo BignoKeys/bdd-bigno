@@ -89,7 +89,7 @@ module.exports = function(Specimen) {
     var Schema = Specimen.app.models.Schema; //usando o schema
     var c = 0;
     var record = {}; //dados as serem gravados no banco
-    record.id = Specimen.app.defineSpecimenID(language,line[1],line[2],line[5]); //definição do id do specimen
+    record.id = Specimen.app.defineSpecimenID(language,line[1],line[2],line[3]); //definição do id do specimen
     if(record.id){   //se o id existir execute
       //para termo da planilha
       async.each(terms, function(term, callbackCell){
@@ -252,7 +252,7 @@ module.exports = function(Specimen) {
         });
       });
     } else {
-      console.log("Cannot define an ID for specimen: ",language,line[1],line[2],line[5]);
+      console.log("Cannot define an ID for specimen: ",language,line[1],line[2],line[3]);
       callback();
     }
   }

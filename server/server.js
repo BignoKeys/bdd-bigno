@@ -9,6 +9,15 @@ require('compression');
 var app = module.exports = loopback();
 
 app.start = function() {
+
+  app.defineCollectionID = function(language, institutionCode, collectionCode) {
+    collectionCode = (typeof collectionCode == 'undefined')?'':String(collectionCode).trim();
+    institutionCode = (typeof institutionCode == 'undefined')?'':String(institutionCode).trim();
+    if(language && language.trim().length>0 && institutionCode.trim().length>0 && collectionCode.trim().length>0)
+      return language.trim().concat(":").concat(institutionCode.trim()).concat(":").concat(collectionCode.trim());
+    else
+      return null;
+  }
   app.defineSchemaID = function(language, schema, class_, term) {
     schema = (typeof schema == 'undefined')?'':String(schema).trim();
     class_ = (typeof class_ == 'undefined')?'':String(class_).trim();
