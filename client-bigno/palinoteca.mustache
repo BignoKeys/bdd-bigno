@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+{{#label}}
+<head>
+   <meta name="keywords" content="" />
+   <meta name="description" content="" />
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>Chaves Interativas Bignoniaceae</title>
+   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700" rel="stylesheet" type="text/css" />
+
+	<!-- Css Documento -->
+	<link rel="stylesheet" href="/css/ficha.css">
+
+	<!-- Arquivos Leaflet Map -->
+	<link rel="stylesheet" href="/javascript/leaflet/leaflet.css" />
+	<script src="/javascript/leaflet/leaflet.js"></script>
+
+	<!-- Arquivos Grid Tabela de Amostras -->
+	<link rel="stylesheet" type="text/css" href="http://w2ui.com/src/w2ui-1.4.min.css" />
+
+	--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+	<script type="text/javascript" src="http://w2ui.com/src/w2ui-1.4.min.js"></script>
+	
+	<script type="text/javascript" src="/javascript/internacionalization.js"></script>
+
+	<!-- Arquivos Galeria - Fotorama -->
+	<link  href="/javascript/fotorama/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+	<script src="/javascript/fotorama/fotorama.js"></script> <!-- 16 KB -->
+
+
+    <script type="text/javascript" src="/javascript/palinoteca.js"></script>
+    <script type="text/javascript" src="/javascript/internacionalization.js"></script>
+
+	<!-- Início: Códigos para o Mapa -->
+	<script type="text/javascript">
+		var id = "{{id}}"
+		function setLanguage(language){
+			localStorage.language = language;
+			window.location = "/profile/palinoteca/{{base}}/"+language+id.substring(5,id.length);
+		}
+ 	  $(document).ready(function(){
+ 	  	var internacionalization = new Internacionalization();
+ 	  	internacionalization.base = '{{base}}';
+	  	internacionalization.updateLogo().siteTranslator();	  		
+
+		// Início do código do Grid-Tabela
+		$('#grid').w2grid({
+		  name: 'grid',
+		  header: 'Lista de Amostras',
+		  show: {
+			toolbar: true,
+			footer: true
+		  },
+		  columns: [
+			{ field: 'recid', caption: 'ID', size: '50px', sortable: true, attr: 'align=center' },
+			{ field: 'species', caption: '{{dwc:Taxon:scientificName}}', size: '30%', sortable: true, resizable: true },
+			{ field: 'tipo', caption: '{{dwc:Occurrence:recordedBy}}', size: '20%', resizable: true },
+			{ field: 'cidade', caption: '{{dwc:Location:municipality}}', size: '10%', resizable: true }
+		  ],
+		  searches: [
+			{ field: 'species', caption: '{{dwc:Taxon:scientificName}}', type: 'text' },
+			{ field: 'tipo', caption: '{{dwc:Occurrence:recordedBy}}', type: 'text' },
+			{ field: 'cidade', caption: '{{dwc:Location:municipality}}', type: 'text' }
+		  ],
+		  sortData: [{ field: 'recid', direction: 'ASC' }]
+		});
+
+		w2ui.grid.on('select', function(event) {
+		  window.open("/profile/specimen/{{base}}/" + w2ui['grid'].get(event.recid).specimen_id);
+		});
+		{{#value}}
+      readSpecimens("{{language}}","{{dwc:RecordLevel:institutionCode:value}}","{{dwc:RecordLevel:collectionCode:value}}");
+		{{/value}}
+	  });
+	  //Final do Código do Grid-Tabela
+
+	</script>
+	<!-- Final: Códigos para o Mapa e Tabela -->
+
+</head>
+<body>
+<div class="contem">
+	<!-- Início Header: Menu e Logotipo -->
+	<div id="header-wrapper">
+		<div id="header">
+			<div id="logo">
+				<h1><a href="/{{base}}" id="bigno-SiteLabel-siteHome">Chaves Interativas Bignoniaceae</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li><a href="/{{base}}" id="bigno-SiteLabel-siteIdentificationKey">Chave de identificação de espécies</a></li>
+					<li><a href="/profile/glossary/{{base}}" id="bigno-SiteLabel-siteGlossary">Glossário</a></li>
+					<li><a href="/profile/about/{{base}}" id="bigno-SiteLabel-siteAbout">Sobre</a></li>
+					<li><a href="/profile/contact/{{base}}" id="bigno-SiteLabel-siteContact">Contato</a></li>
+				</ul>
+			</div>
+			<div id=menu>
+					<ul>
+						<li>
+							<span class="t-lang">
+								<img onclick="setLanguage('pt-BR')"  src="/images/pt_BR.png">
+								<img onclick="setLanguage('en-US')"  src="/images/en_GB.png">
+							</span>
+						</li>
+					</ul>
+			</div>
+		</div>
+	</div>
+	<!-- Fim Header: Menu e Logotipo -->
+	<div id="wrapper">
+		<div id="wide-content">
+	<!-- Início das informações da Palinoteca -->
+	<article>
+		{{#value}}
+
+		<!-- Nome da Palinoteca -->
+		<h1 id="nomeDaPalinoteca" class="pal"></h1>
+
+		<!-- Início: Embrulho Informações e Logo -->
+		<div class="cspm">
+
+		<!-- Início: Informações Palinoteca -->
+		<div class="info-pal">
+
+		  <p><span id="nomeDaInstituicao">{{bigno:Collection:institutionName:value}}</span> - {{dwc:RecordLevel:institutionCode:value}}</p>
+		  <p><span id="nomeDoInstituto">{{bigno:Collection:instituteName:value}}</span></p>
+		  <p><span id="nomeDoDepartamento">{{bigno:Collection:department:value}}</span></p>
+		  <p><span id="nomeDoLaboratorio">{{bigno:Collection:laboratory:value}}</span></p>
+		  <p><span id="palinoteca">{{bigno:Collection:collectionName:value}}</span> - <span id="siglaDaPalinoteca">{{dwc:RecordLevel:collectionCode:value}}</span></p>
+		  <p><b>{{bigno:Collection:responsible:label}}:</b> <span id="responsavel">{{bigno:Collection:responsible:value}}</span></p>
+		  <p><b>{{bigno:Collection:address:label}}:</b> <span id="endereco">{{bigno:Collection:address:value}}</span></p>
+		  <p><b>{{bigno:Collection:telephone:label}}:</b> <span id="telefone">{{bigno:Collection:telephone:value}}</span></p>
+		  <p><b>{{bigno:Collection:email:label}}:</b> <span id="email">{{bigno:Collection:email:value}}</span></p>
+
+		  <!-- Link para homepage da palinoteca -->
+		  <p><b>Homepage:</b> <a id="homepage_link" href="{{bigno:Collection:homepage:value}}" target="_blank"><span id="homepage">{{bigno:Collection:homepage:value}}</span></a></p>
+
+		</div>
+		<!-- Final: Informações Palinoteca -->
+
+		<!-- Início: Logotipo da Palinoteca -->
+		<div class="img-spal">
+
+			<img id="logo" src="{{bigno:Image:logotipo:value}}">
+
+		</div>
+		<!-- Final: Logotipo da Palinoteca -->
+
+		</div>
+		<!-- Início: Embrulho Informações e Logo -->
+
+		<!-- Início: Espécimes depositados na coleção -->
+		<div class="amostras">
+
+			<h2>{{bigno:ProfilesLabel:profilesSpecimenDepositedInCollection}}:</h2>
+
+			<div id="grid"></div>
+
+		</div>
+		<!-- Final: Espécimes depositados na coleção -->
+			<h2 style="margin-bottom:10px" id="bigno-SiteLabel-howToCite">Como citar:</h2>
+			<h3 id="bigno-SiteLabel-citation">Chaves Interativas Bignoniaceae. Available in:  <<a href=" href="http://chave.bigno.org.br">http://chave.bigno.org.br/</a>>. Date of access: </h3>
+		{{/value}}
+	</article>
+	<!-- Final das informações da Palinoteca -->
+	</div>
+</div>
+	<!-- Início do Rodapé -->
+		<div id="footer">
+			<p id="bigno-SiteLabel-siteCopyright">Copyright &copy; 2016 BioComp - Todos os direitos reservados e outras informa&ccedil;&otilde;es</p>
+		</div>
+	<!-- Final do Rodapé -->
+
+</div>
+</body>
+{{/label}}
+</html>
